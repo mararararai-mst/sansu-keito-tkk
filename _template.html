@@ -61,15 +61,22 @@ td.mid{background:#fff}
 body.q .chip{opacity:.28}
 body.q .chip.hit{opacity:1;background:#fff6c7;border-color:#c9a400}
 body.q .chip.empty.hit{background:#fff6c7}
-.tools{padding:16px 20px 8px}
-.tools h2{font-size:16px;margin:0 0 2px}
-.tools p{margin:0 0 10px;color:var(--mute);font-size:12px}
-.tgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px}
-.tcard{border:1px solid var(--line);border-radius:8px;padding:8px 10px;background:#fff}
-.tcard h3{margin:0 0 6px;font-size:13px}
-.tcard a{display:block;font-size:12.5px;padding:3px 0;color:var(--chip-ink);text-decoration:none;border-bottom:1px dotted #e3e7ec;text-wrap:balance;word-break:auto-phrase}
-.tcard a:last-child{border-bottom:0}
-.tcard a:hover{text-decoration:underline}
+.tools{padding:20px 20px 10px;background:#f7f8fa;border-top:1px solid var(--line)}
+.tools h2{font-size:18px;margin:0 0 2px}
+.tools p{margin:0 0 12px;color:var(--mute);font-size:13px}
+.tgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
+.tcard{border:1px solid var(--line);border-radius:10px;padding:0;background:#fff;overflow:hidden}
+.tcard h3{margin:0;font-size:15px;padding:10px 12px;background:var(--head);border-bottom:1px solid var(--line);display:flex;align-items:center;gap:8px}
+.tcard h3 svg{width:22px;height:22px;flex:none;color:var(--accent)}
+.tcard h3 small{margin-left:auto;font-weight:400;color:var(--mute);font-size:12px}
+.tl{display:flex;align-items:center;gap:10px;padding:9px 12px;color:var(--ink);text-decoration:none;border-bottom:1px solid #eceff2;min-height:46px}
+.tl:last-child{border-bottom:0}
+.tl:hover{background:#eaf1f9}
+.tl .tx{flex:1;min-width:0}
+.tl .tn{display:block;font-weight:600;font-size:14px;line-height:1.35;color:var(--chip-ink)}
+.tl .ts{display:block;font-size:12px;color:var(--mute);line-height:1.35;margin-top:1px}
+.tl .go{flex:none;padding:5px 11px;border-radius:14px;background:var(--accent);color:#fff;font-size:12px;font-weight:600;white-space:nowrap}
+.tl.art .go{background:#fff;color:var(--accent);border:1px solid var(--accent)}
 footer{padding:12px 20px 28px;color:var(--mute);font-size:12px;line-height:1.7;border-top:1px solid var(--line);margin-top:8px}
 footer b{color:var(--ink)}
 /* panel */
@@ -148,6 +155,9 @@ footer b{color:var(--ink)}
   body.q .chip{opacity:1;background:#fff}
   .tools{break-before:page}
   .tcard{border-color:#000}
+  .tools{background:#fff}
+  .tl .go{display:none}
+  .tl{min-height:0;padding:3px 6px}
 }
 </style>
 </head>
@@ -261,9 +271,16 @@ mlist.addEventListener("click", e => { const b = e.target.closest(".chip[data-ke
 
 // ---- tools
 const tools = document.getElementById("tools");
+const ICON = {
+  "時間の見える化": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l3 2M9 2h6M12 2v3"/></svg>',
+  "数える・くじ・サイコロ": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8" cy="8" r="1.2" fill="currentColor"/><circle cx="16" cy="8" r="1.2" fill="currentColor"/><circle cx="12" cy="12" r="1.2" fill="currentColor"/><circle cx="8" cy="16" r="1.2" fill="currentColor"/><circle cx="16" cy="16" r="1.2" fill="currentColor"/></svg>',
+  "ノート・プリントづくり": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 3h9l4 4v14H6z"/><path d="M15 3v4h4M9 12h6M9 16h6"/></svg>',
+  "まとめ記事": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 5h6a3 3 0 0 1 3 3v12a2 2 0 0 0-2-2H4zM20 5h-6a3 3 0 0 0-3 3v12a2 2 0 0 1 2-2h7z"/></svg>'
+};
 tools.innerHTML = `<h2>${esc(DATA.tools.name)}</h2><p>${esc(DATA.tools.sub)}</p><div class="tgrid">` +
-  DATA.tools.items.map(it => `<div class="tcard"><h3>${esc(it.g)}</h3>` +
-    it.apps.map(k => { const a = DATA.apps[k]; return `<a href="${esc(a.app || a.article)}" target="_blank" rel="noopener">${esc(a.name)}${a.app ? "" : '<span class="tag">記事</span>'}</a>`; }).join("") +
+  DATA.tools.items.map(it => `<div class="tcard"><h3>${ICON[it.g] || ""}${esc(it.g)}<small>${it.apps.length}本</small></h3>` +
+    it.apps.map(k => { const a = DATA.apps[k]; const isApp = !!a.app;
+      return `<a class="tl ${isApp ? "" : "art"}" href="${esc(a.app || a.article)}" target="_blank" rel="noopener"><span class="tx"><span class="tn">${esc(a.name)}</span>${a.sub ? `<span class="ts">${esc(a.sub)}</span>` : ""}</span><span class="go">${isApp ? "開く" : "記事"}</span></a>`; }).join("") +
   `</div>`).join("") + "</div>";
 
 // ---- panel
