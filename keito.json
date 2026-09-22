@@ -1,0 +1,1004 @@
+{
+  "_note": "系統（rows/cells の chip 名）は 文科省『小学校学習指導要領（平成29年告示）解説 算数編』第1章 図1（pp.12-15）の文言を短くしたもの。apps の当てはめは あらい（Claude作成）の判断で、TKKサイトの記事タイトルから推定。",
+  "grades": [
+    "1年",
+    "2年",
+    "3年",
+    "4年",
+    "5年",
+    "6年",
+    "中学へ"
+  ],
+  "groups": [
+    {
+      "name": "A　数と計算",
+      "rows": [
+        {
+          "id": "kazu",
+          "name": "数のしくみ",
+          "sub": "数える・位取り・大きな数・概数・整数の性質",
+          "cells": {
+            "1年": [
+              {
+                "c": "個数をかぞえる（10まで）",
+                "apps": [
+                  "count10",
+                  "numbers-to-10-flashcards",
+                  "finger-counter",
+                  "finger-flashcard",
+                  "suzublock"
+                ]
+              },
+              {
+                "c": "10といくつ・数の大小・数直線（20まで）",
+                "apps": [
+                  "ten-and-ones-flashcard",
+                  "number-comparison",
+                  "number-line-missing-number"
+                ]
+              },
+              {
+                "c": "2位数の表し方（120程度まで）・数の順序",
+                "apps": [
+                  "kazu-narabe",
+                  "number-cards",
+                  "number-flashcards",
+                  "slide-puzzle-15"
+                ]
+              }
+            ],
+            "2年": [
+              {
+                "c": "十進位取り記数法（1000・10000まで）",
+                "apps": [
+                  "place-value-room",
+                  "kuraidori-2",
+                  "t:位取り表｜Place"
+                ]
+              },
+              {
+                "c": "まとめて数える（2とび・5とび）",
+                "apps": [
+                  "skip-counting-counter"
+                ]
+              }
+            ],
+            "3年": [
+              {
+                "c": "万の単位",
+                "apps": [
+                  "big-number-flashcard",
+                  "t:位取り表｜Place"
+                ]
+              },
+              {
+                "c": "10倍・100倍・1/10の大きさ",
+                "apps": []
+              }
+            ],
+            "4年": [
+              {
+                "c": "億・兆の単位",
+                "apps": [
+                  "mugen",
+                  "big-number-flashcard"
+                ]
+              },
+              {
+                "c": "概数・四捨五入",
+                "apps": [
+                  "shishagonyu-seesaw",
+                  "rounding-calculator-2",
+                  "rounding-calculator"
+                ]
+              },
+              {
+                "c": "以上・以下・未満",
+                "apps": [
+                  "number-caterpillar-concept"
+                ]
+              }
+            ],
+            "5年": [
+              {
+                "c": "偶数・奇数",
+                "apps": [
+                  "mugenkisuuguusuu"
+                ]
+              },
+              {
+                "c": "約数・倍数",
+                "apps": [
+                  "syakusu",
+                  "kouyakusu",
+                  "kobaisu"
+                ]
+              },
+              {
+                "c": "整数・小数の記数法（10倍・1/10）",
+                "apps": [
+                  "number-cosmos"
+                ]
+              }
+            ],
+            "6年": [
+              {
+                "c": "文字を用いた式",
+                "apps": []
+              }
+            ],
+            "中学へ": [
+              {
+                "c": "正負の数（中1）",
+                "apps": [
+                  "number-line"
+                ]
+              },
+              {
+                "c": "素数（中1）",
+                "apps": [
+                  "sosutetorisu"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "id": "tashihiki",
+          "name": "たし算・ひき算",
+          "sub": "加法・減法",
+          "cells": {
+            "1年": [
+              {
+                "c": "10の補数（いくつといくつ）",
+                "apps": [
+                  "ikutsu-to-ikutsu-flashcard",
+                  "awase10",
+                  "add-to-ten-game",
+                  "10tam-soroban"
+                ]
+              },
+              {
+                "c": "1位数の加法・減法",
+                "apps": [
+                  "tasizan-flashcard",
+                  "dot-addition",
+                  "tasihikiprint",
+                  "seisanba-0-20",
+                  "20dama",
+                  "number-line-bar-3d"
+                ]
+              },
+              {
+                "c": "20までの加法・減法（くり上がり・くり下がり）",
+                "apps": [
+                  "20print",
+                  "seisanba-0-20",
+                  "t:けいさんめいろ"
+                ]
+              },
+              {
+                "c": "簡単な2位数の加法・減法",
+                "apps": [
+                  "seisanba-0-100",
+                  "100tam-soroban",
+                  "t:計算バー０〜100"
+                ]
+              }
+            ],
+            "2年": [
+              {
+                "c": "2位数の筆算（くり上がり・くり下がり）",
+                "apps": [
+                  "addition-carry-cards",
+                  "tashizan-hissan",
+                  "subtraction-card",
+                  "hikizan-hissan",
+                  "masu-note-maker"
+                ]
+              },
+              {
+                "c": "簡単な3位数の加法・減法",
+                "apps": []
+              },
+              {
+                "c": "加法と減法の相互関係",
+                "apps": []
+              }
+            ],
+            "3年": [
+              {
+                "c": "3位数・4位数の筆算",
+                "apps": [
+                  "tashizan-hissan",
+                  "hikizan-hissan"
+                ]
+              },
+              {
+                "c": "□を用いた式",
+                "apps": []
+              }
+            ],
+            "4年": [
+              {
+                "c": "四則混合・（　）を用いた式",
+                "apps": []
+              }
+            ],
+            "5年": [],
+            "6年": [],
+            "中学へ": []
+          },
+          "before": [
+            {
+              "row": "kazu",
+              "why": "10の補数・位取りがあいまいだと、くり上がり・くり下がりで止まる",
+              "grade": "1年",
+              "chip": "10といくつ"
+            }
+          ]
+        },
+        {
+          "id": "kake",
+          "name": "かけ算",
+          "sub": "乗法",
+          "cells": {
+            "1年": [],
+            "2年": [
+              {
+                "c": "かけ算の意味（いくつ分）",
+                "apps": [
+                  "kakezanmachine",
+                  "multiply-add-translator",
+                  "multiplication-slider",
+                  "t:ノートでやりたい"
+                ]
+              },
+              {
+                "c": "九九",
+                "apps": [
+                  "kakezan-flashcard",
+                  "anaaki-kuku-flashcard",
+                  "multiplication-block-game",
+                  "kakepuri",
+                  "kuku-song-matome"
+                ]
+              },
+              {
+                "c": "簡単な2位数×1位数",
+                "apps": []
+              }
+            ],
+            "3年": [
+              {
+                "c": "2・3位数×1・2位数の筆算",
+                "apps": [
+                  "kakezan-hissan"
+                ]
+              },
+              {
+                "c": "乗法の性質",
+                "apps": []
+              }
+            ],
+            "4年": [
+              {
+                "c": "四則に関して成り立つ性質",
+                "apps": []
+              }
+            ],
+            "5年": [],
+            "6年": [],
+            "中学へ": []
+          },
+          "before": [
+            {
+              "row": "tashihiki",
+              "why": "かけ算は同じ数を何回もたす（累加）。たし算が止まるなら先にそこへ",
+              "grade": "1年",
+              "chip": "1位数の加法"
+            }
+          ]
+        },
+        {
+          "id": "wari",
+          "name": "わり算",
+          "sub": "除法",
+          "cells": {
+            "1年": [],
+            "2年": [],
+            "3年": [
+              {
+                "c": "わり算の意味（等分除・包含除）",
+                "apps": [
+                  "warizan"
+                ]
+              },
+              {
+                "c": "÷1位数の計算・あまり",
+                "apps": [
+                  "warizan-flashcard",
+                  "warizanprint",
+                  "anaaki-kuku-flashcard"
+                ]
+              },
+              {
+                "c": "除法と乗法・減法の関係",
+                "apps": []
+              }
+            ],
+            "4年": [
+              {
+                "c": "÷1位数・÷2位数の筆算",
+                "apps": [
+                  "warizan-hissan"
+                ]
+              },
+              {
+                "c": "被除数・除数・商・余りの関係",
+                "apps": []
+              }
+            ],
+            "5年": [],
+            "6年": [],
+            "中学へ": []
+          },
+          "before": [
+            {
+              "row": "kake",
+              "why": "わり算はかけ算の逆。九九が言えないと商が立たない",
+              "grade": "2年",
+              "chip": "九九"
+            },
+            {
+              "row": "tashihiki",
+              "why": "あまりを出すにはひき算。筆算は「たてる・かける・ひく・おろす」",
+              "grade": "2年",
+              "chip": "筆算"
+            }
+          ]
+        },
+        {
+          "id": "shosu",
+          "name": "小数",
+          "sub": "",
+          "cells": {
+            "1年": [],
+            "2年": [],
+            "3年": [
+              {
+                "c": "小数の意味と表し方（1/10の位）",
+                "apps": [
+                  "syousu-strip"
+                ]
+              },
+              {
+                "c": "小数の加法・減法",
+                "apps": []
+              }
+            ],
+            "4年": [
+              {
+                "c": "1/100の位・小数の大きさ",
+                "apps": [
+                  "number-cosmos"
+                ]
+              },
+              {
+                "c": "小数×整数・÷整数",
+                "apps": []
+              }
+            ],
+            "5年": [
+              {
+                "c": "小数×小数・÷小数",
+                "apps": []
+              },
+              {
+                "c": "小数と分数の関係",
+                "apps": [
+                  "syousu-bunsu"
+                ]
+              }
+            ],
+            "6年": [],
+            "中学へ": []
+          },
+          "before": [
+            {
+              "row": "kazu",
+              "why": "小数は位取りの延長（1/10の位）。位の部屋が見えていないと読めない",
+              "grade": "2年",
+              "chip": "位取り"
+            },
+            {
+              "row": "tashihiki",
+              "why": "小数の加減は整数の筆算と同じ手順",
+              "grade": "2年",
+              "chip": "筆算"
+            }
+          ]
+        },
+        {
+          "id": "bunsu",
+          "name": "分数",
+          "sub": "",
+          "cells": {
+            "1年": [],
+            "2年": [
+              {
+                "c": "1/2・1/3などの簡単な分数",
+                "apps": []
+              }
+            ],
+            "3年": [
+              {
+                "c": "分数の意味・単位分数のいくつ分",
+                "apps": [
+                  "fraction-strip"
+                ]
+              },
+              {
+                "c": "簡単な分数の加法・減法",
+                "apps": []
+              }
+            ],
+            "4年": [
+              {
+                "c": "真分数・仮分数・帯分数",
+                "apps": [
+                  "fraction-mitemiyou"
+                ]
+              },
+              {
+                "c": "大きさの等しい分数",
+                "apps": [
+                  "fraction-strip"
+                ]
+              },
+              {
+                "c": "同分母の加法・減法",
+                "apps": [
+                  "fraction-add-sub-visualizer"
+                ]
+              }
+            ],
+            "5年": [
+              {
+                "c": "約分・通分",
+                "apps": [
+                  "fraction-calculator-2"
+                ]
+              },
+              {
+                "c": "異分母の加法・減法",
+                "apps": [
+                  "fraction-add-sub-visualizer",
+                  "fraction-calculator",
+                  "fraction-print-maker"
+                ]
+              },
+              {
+                "c": "分数と整数・小数の関係（÷の結果）",
+                "apps": [
+                  "syousu-bunsu"
+                ]
+              }
+            ],
+            "6年": [
+              {
+                "c": "分数×分数・÷分数",
+                "apps": [
+                  "fraction-calculator"
+                ]
+              }
+            ],
+            "中学へ": []
+          },
+          "before": [
+            {
+              "row": "wari",
+              "why": "分数は「等分」から。等分除のイメージが土台",
+              "grade": "3年",
+              "chip": "意味"
+            },
+            {
+              "row": "kake",
+              "why": "約分・通分は約数・倍数（＝九九）を使う",
+              "grade": "2年",
+              "chip": "九九"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "B　図形",
+      "rows": [
+        {
+          "id": "zukei",
+          "name": "図形",
+          "sub": "形・角・面積・体積（4年以上の面積・角・体積はB図形）",
+          "cells": {
+            "1年": [
+              {
+                "c": "形とその特徴・形の構成と分解",
+                "apps": [
+                  "iroita-asobi-app"
+                ]
+              },
+              {
+                "c": "方向やものの位置",
+                "apps": []
+              }
+            ],
+            "2年": [
+              {
+                "c": "三角形・四角形",
+                "apps": [
+                  "shapes-name-quiz",
+                  "plane-shapes-flashcards"
+                ]
+              },
+              {
+                "c": "正方形・長方形・直角三角形",
+                "apps": [
+                  "plane-shapes-flashcards"
+                ]
+              },
+              {
+                "c": "箱の形",
+                "apps": []
+              }
+            ],
+            "3年": [
+              {
+                "c": "二等辺三角形・正三角形・角",
+                "apps": [
+                  "plane-shapes-flashcards"
+                ]
+              },
+              {
+                "c": "円・球",
+                "apps": []
+              }
+            ],
+            "4年": [
+              {
+                "c": "平行・垂直／平行四辺形・ひし形・台形",
+                "apps": [
+                  "plane-shapes-flashcards"
+                ]
+              },
+              {
+                "c": "立方体・直方体・見取図・展開図",
+                "apps": [
+                  "solid-shapes-flashcards",
+                  "tenkaizu-maker"
+                ]
+              },
+              {
+                "c": "面積（cm²・m²・km²）",
+                "apps": [
+                  "area-board",
+                  "area-calculator"
+                ]
+              },
+              {
+                "c": "角の大きさ（分度器）",
+                "apps": [
+                  "protractor-reading"
+                ]
+              }
+            ],
+            "5年": [
+              {
+                "c": "合同／多角形・正多角形",
+                "apps": []
+              },
+              {
+                "c": "円周率",
+                "apps": [
+                  "3-14"
+                ]
+              },
+              {
+                "c": "角柱・円柱",
+                "apps": [
+                  "solid-shapes-flashcards",
+                  "tenkaizu-maker"
+                ]
+              },
+              {
+                "c": "三角形・平行四辺形などの面積",
+                "apps": [
+                  "area-board"
+                ]
+              },
+              {
+                "c": "体積（cm³・m³）",
+                "apps": [
+                  "volume-calculator"
+                ]
+              }
+            ],
+            "6年": [
+              {
+                "c": "拡大図・縮図／対称な図形",
+                "apps": []
+              },
+              {
+                "c": "円の面積",
+                "apps": []
+              },
+              {
+                "c": "角柱・円柱の体積",
+                "apps": []
+              }
+            ],
+            "中学へ": []
+          },
+          "before": [
+            {
+              "row": "kake",
+              "why": "面積・体積の公式はかけ算。単位の換算は位取り",
+              "grade": "2年",
+              "chip": "九九"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "C　測定（1〜3年）→ 変化と関係（4〜6年）",
+      "rows": [
+        {
+          "id": "ryou",
+          "name": "量と単位",
+          "sub": "長さ・かさ・重さ・メートル法",
+          "cells": {
+            "1年": [
+              {
+                "c": "長さ・広さ・かさの直接比較・任意単位",
+                "apps": []
+              }
+            ],
+            "2年": [
+              {
+                "c": "長さ（mm・cm・m）",
+                "apps": [
+                  "web-ruler"
+                ]
+              },
+              {
+                "c": "かさ（mL・dL・L）",
+                "apps": [
+                  "1l",
+                  "kasa-calculator"
+                ]
+              }
+            ],
+            "3年": [
+              {
+                "c": "長さ（km）",
+                "apps": [
+                  "length-calculator"
+                ]
+              },
+              {
+                "c": "重さ（g・kg・t）",
+                "apps": [
+                  "weight-calculator"
+                ]
+              },
+              {
+                "c": "メートル法の単位のしくみ（k・m）",
+                "apps": [
+                  "tanikansan"
+                ]
+              }
+            ],
+            "4年": [
+              {
+                "c": "長さと面積の単位の関係",
+                "apps": [
+                  "area-calculator",
+                  "tanikansan"
+                ]
+              }
+            ],
+            "5年": [
+              {
+                "c": "長さと体積の単位の関係",
+                "apps": [
+                  "volume-calculator",
+                  "tanikansan"
+                ]
+              }
+            ],
+            "6年": [],
+            "中学へ": []
+          },
+          "before": [
+            {
+              "row": "kazu",
+              "why": "単位の換算は10倍・100倍・1/10の位取りそのもの",
+              "grade": "3年",
+              "chip": "10倍"
+            }
+          ]
+        },
+        {
+          "id": "jikoku",
+          "name": "時こくと時間",
+          "sub": "",
+          "cells": {
+            "1年": [
+              {
+                "c": "時刻の読み方",
+                "apps": [
+                  "clock-model",
+                  "clock-reading-flashcard",
+                  "separated-clock"
+                ]
+              }
+            ],
+            "2年": [
+              {
+                "c": "時間の単位（日・時・分）",
+                "apps": [
+                  "tokei",
+                  "time-calculator"
+                ]
+              }
+            ],
+            "3年": [
+              {
+                "c": "秒",
+                "apps": [
+                  "body-clock-10sec",
+                  "visible-time-stopwatch"
+                ]
+              },
+              {
+                "c": "時刻や時間を求める",
+                "apps": [
+                  "tokei",
+                  "time-calculator"
+                ]
+              }
+            ],
+            "4年": [],
+            "5年": [],
+            "6年": [],
+            "中学へ": []
+          },
+          "before": [
+            {
+              "row": "kazu",
+              "why": "60進法の前に、5とび・10とびで数えられるか",
+              "grade": "2年",
+              "chip": "まとめて"
+            }
+          ]
+        },
+        {
+          "id": "henka",
+          "name": "変化と関係",
+          "sub": "割合・比例・速さ・比",
+          "cells": {
+            "1年": [],
+            "2年": [],
+            "3年": [],
+            "4年": [
+              {
+                "c": "伴って変わる2つの数量",
+                "apps": []
+              },
+              {
+                "c": "簡単な場合の割合",
+                "apps": []
+              }
+            ],
+            "5年": [
+              {
+                "c": "簡単な比例",
+                "apps": []
+              },
+              {
+                "c": "単位量あたり・速さ",
+                "apps": []
+              },
+              {
+                "c": "割合・百分率",
+                "apps": [
+                  "discount-calculator-app"
+                ]
+              }
+            ],
+            "6年": [
+              {
+                "c": "比例・反比例",
+                "apps": []
+              },
+              {
+                "c": "比",
+                "apps": []
+              }
+            ],
+            "中学へ": []
+          },
+          "before": [
+            {
+              "row": "wari",
+              "why": "割合・単位量あたりは「わり算の意味」の拡張",
+              "grade": "3年",
+              "chip": "意味"
+            },
+            {
+              "row": "shosu",
+              "why": "百分率・小数倍は小数のかけ算・わり算",
+              "grade": "5年",
+              "chip": "小数×小数"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "D　データの活用",
+      "rows": [
+        {
+          "id": "data",
+          "name": "データの活用",
+          "sub": "TKKにはアプリなし（系統のみ表示）",
+          "cells": {
+            "1年": [
+              {
+                "c": "絵や図を用いた数量の表現",
+                "apps": []
+              }
+            ],
+            "2年": [
+              {
+                "c": "簡単な表やグラフ",
+                "apps": []
+              }
+            ],
+            "3年": [
+              {
+                "c": "表と棒グラフ",
+                "apps": []
+              }
+            ],
+            "4年": [
+              {
+                "c": "折れ線グラフ・二つの観点の分類",
+                "apps": []
+              }
+            ],
+            "5年": [
+              {
+                "c": "円グラフ・帯グラフ／平均",
+                "apps": []
+              }
+            ],
+            "6年": [
+              {
+                "c": "代表値・ドットプロット／起こり得る場合",
+                "apps": []
+              }
+            ],
+            "中学へ": []
+          }
+        }
+      ]
+    },
+    {
+      "name": "生活の中の算数（指導要領の算数にはない内容）",
+      "rows": [
+        {
+          "id": "okane",
+          "name": "お金",
+          "sub": "特別支援・生活単元向け。学年は目安",
+          "cells": {
+            "1年": [
+              {
+                "c": "お金をならべて数える",
+                "apps": [
+                  "okane-kazoeyou"
+                ]
+              }
+            ],
+            "2年": [
+              {
+                "c": "いくら払う？・レジで出す",
+                "apps": [
+                  "money-practice",
+                  "money-app",
+                  "dagashi-shop"
+                ]
+              }
+            ],
+            "3年": [
+              {
+                "c": "両替（10円×10＝100円）",
+                "apps": [
+                  "ryogae-tenbin"
+                ]
+              }
+            ],
+            "4年": [],
+            "5年": [
+              {
+                "c": "割引・％OFF",
+                "apps": [
+                  "discount-calculator-app"
+                ]
+              }
+            ],
+            "6年": [],
+            "中学へ": []
+          },
+          "before": [
+            {
+              "row": "kazu",
+              "why": "10のまとまり（10円玉10枚＝100円）は位取りと同じ",
+              "grade": "2年",
+              "chip": "位取り"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "tools": {
+    "name": "学年をとわず使う道具",
+    "sub": "系統表には入らないが、算数の授業でよく使うもの",
+    "items": [
+      {
+        "g": "時間の見える化",
+        "apps": [
+          "timetimer",
+          "timetimer60",
+          "time-timer-routine",
+          "analog-clock-timer",
+          "analog-time-timer-schedule",
+          "dotstimer",
+          "drawing-timer",
+          "visible-time-stopwatch",
+          "stopwatch-with-units"
+        ]
+      },
+      {
+        "g": "数える・くじ・サイコロ",
+        "apps": [
+          "web-counter",
+          "multi-web-counter",
+          "web-saikoro",
+          "custom-bingo-machine",
+          "custom-web-bingo-card"
+        ]
+      },
+      {
+        "g": "ノート・プリントづくり",
+        "apps": [
+          "masu-note-maker",
+          "t:君だけのノート",
+          "20print",
+          "tasihikiprint",
+          "kakepuri",
+          "warizanprint",
+          "fraction-print-maker"
+        ]
+      },
+      {
+        "g": "まとめ記事",
+        "apps": [
+          "math-flashcards",
+          "kuku-song-matome"
+        ]
+      }
+    ]
+  }
+}
