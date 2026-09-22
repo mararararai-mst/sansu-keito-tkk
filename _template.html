@@ -9,12 +9,15 @@
 <meta property="og:description" content="TKKの無料算数アプリを学習指導要領の系統にならべたリンク集。単元を押すとアプリと戻る先が出ます。">
 <meta property="og:type" content="website">
 <style>
+/* Zen Maru Gothic（SIL OFL 1.1）。使う文字だけに絞った同梱版。font/OFL.txt にライセンス全文 */
+@font-face{font-family:"ZenMaruSubset";src:local("Zen Maru Gothic Medium"),local("ZenMaruGothic-Medium"),url("font/ZenMaruGothic-Medium.subset.woff2") format("woff2");font-weight:400 500;font-style:normal;font-display:swap}
+@font-face{font-family:"ZenMaruSubset";src:local("Zen Maru Gothic Bold"),local("ZenMaruGothic-Bold"),url("font/ZenMaruGothic-Bold.subset.woff2") format("woff2");font-weight:600 900;font-style:normal;font-display:swap}
 :root{
   --ink:#1f2429; --mute:#6b7480; --line:#cdd3da; --bg:#fff; --head:#f4f6f8;
   --chip-line:#8fa3b8; --chip-ink:#173a5e; --chip-bg:#fff; --chip-hover:#eaf1f9;
   --badge:#2b5c8a; --accent:#2b5c8a;
   --tintA:#eef3f8; --tintB:#eef6ee; --tintC:#fbf5e8; --tintD:#f2f2f2; --tintL:#f7eef2;
-  --font:"Segoe UI","Yu Gothic UI","Hiragino Sans","Meiryo",system-ui,sans-serif;
+  --font:"ZenMaruSubset","Zen Maru Gothic","Hiragino Maru Gothic ProN","Yu Gothic UI","Hiragino Sans",Meiryo,system-ui,sans-serif;
 }
 *{box-sizing:border-box}
 [hidden]{display:none!important}
@@ -80,6 +83,7 @@ body.q .chip.empty.hit{background:#fff6c7}
 .tl.art .go{background:#fff;color:var(--accent);border:1px solid var(--accent)}
 footer{padding:12px 20px 28px;color:var(--mute);font-size:12px;line-height:1.7;border-top:1px solid var(--line);margin-top:8px}
 footer b{color:var(--ink)}
+b,strong,.chip .n,.tl .go{font-weight:700}
 /* panel */
 #shade{position:fixed;inset:0;background:rgba(20,30,40,.25);z-index:20}
 .panel{position:fixed;top:0;right:0;height:100vh;width:min(440px,100vw);background:#fff;z-index:21;box-shadow:-6px 0 24px rgba(0,0,0,.12);display:flex;flex-direction:column}
