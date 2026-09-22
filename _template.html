@@ -33,7 +33,7 @@ button{font-family:inherit}
 .legend .chip{pointer-events:none;font-size:12px}
 .legend #hits{margin-left:auto;color:var(--ink)}
 .tblwrap{overflow:auto;max-height:calc(100vh - 150px);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
-table{border-collapse:separate;border-spacing:0;min-width:1180px;width:100%}
+table{border-collapse:separate;border-spacing:0;min-width:1420px;width:100%}
 th,td{border-right:1px solid var(--line);border-bottom:1px solid var(--line);vertical-align:top;padding:6px}
 thead th{position:sticky;top:0;background:var(--head);z-index:3;text-align:center;font-size:14px;padding:8px 6px}
 thead th:first-child{z-index:4;text-align:left}
@@ -50,11 +50,12 @@ tr.grp[data-tint="B"] th{background:#dcebdc}
 tr.grp[data-tint="C"] th{background:#f3e7cc}
 tr.grp[data-tint="D"] th{background:#e3e3e3}
 tr.grp[data-tint="L"] th{background:#eedde3}
-td{min-width:130px}
+td{min-width:180px}
 td.mid{background:#fff}
-.chip{display:block;width:100%;text-align:left;margin:0 0 5px;padding:5px 7px;border:1px solid var(--chip-line);border-radius:6px;background:var(--chip-bg);color:var(--chip-ink);font-size:12.5px;line-height:1.35;cursor:pointer;position:relative;text-wrap:balance;word-break:auto-phrase;overflow-wrap:anywhere}
+.chip{display:flex;align-items:center;justify-content:space-between;gap:6px;width:100%;min-height:40px;text-align:left;margin:0 0 5px;padding:5px 8px;border:1px solid var(--chip-line);border-radius:6px;background:var(--chip-bg);color:var(--chip-ink);font-size:12.5px;line-height:1.35;cursor:pointer;position:relative;word-break:auto-phrase;overflow-wrap:anywhere}
+.chip .t{flex:1;min-width:0;text-wrap:balance}
 .chip:hover{background:var(--chip-hover);border-color:var(--accent)}
-.chip .n{display:inline-block;margin:0 0 0 6px;min-width:20px;padding:0 6px;border-radius:10px;background:var(--badge);color:#fff;font-size:11px;font-weight:700;text-align:center;line-height:18px;vertical-align:1px}
+.chip .n{flex:none;min-width:22px;padding:0 6px;border-radius:11px;background:var(--badge);color:#fff;font-size:11px;font-weight:700;text-align:center;line-height:20px}
 .chip.empty{border-style:dashed;color:var(--mute);background:transparent}
 .chip.empty:hover{background:#f6f8fa;border-color:var(--chip-line)}
 .chip.on{outline:2px solid var(--accent);outline-offset:1px}
@@ -73,8 +74,8 @@ body.q .chip.empty.hit{background:#fff6c7}
 .tl:last-child{border-bottom:0}
 .tl:hover{background:#eaf1f9}
 .tl .tx{flex:1;min-width:0}
-.tl .tn{display:block;font-weight:600;font-size:14px;line-height:1.35;color:var(--chip-ink)}
-.tl .ts{display:block;font-size:12px;color:var(--mute);line-height:1.35;margin-top:1px}
+.tl .tn{display:block;font-weight:600;font-size:14px;line-height:1.35;color:var(--chip-ink);text-wrap:balance}
+.tl .ts{display:block;font-size:12px;color:var(--mute);line-height:1.35;margin-top:1px;text-wrap:balance}
 .tl .go{flex:none;padding:5px 11px;border-radius:14px;background:var(--accent);color:#fff;font-size:12px;font-weight:600;white-space:nowrap}
 .tl.art .go{background:#fff;color:var(--accent);border:1px solid var(--accent)}
 footer{padding:12px 20px 28px;color:var(--mute);font-size:12px;line-height:1.7;border-top:1px solid var(--line);margin-top:8px}
@@ -82,9 +83,10 @@ footer b{color:var(--ink)}
 /* panel */
 #shade{position:fixed;inset:0;background:rgba(20,30,40,.25);z-index:20}
 .panel{position:fixed;top:0;right:0;height:100vh;width:min(440px,100vw);background:#fff;z-index:21;box-shadow:-6px 0 24px rgba(0,0,0,.12);display:flex;flex-direction:column}
-.panel .ph{padding:14px 16px 10px;border-bottom:1px solid var(--line)}
+.panel .ph{padding:14px 52px 10px 16px;border-bottom:1px solid var(--line)}
 .panel .crumb{color:var(--mute);font-size:12px;margin-bottom:2px}
 .panel h2{margin:0;font-size:18px;line-height:1.35}
+.panel .full{margin:4px 0 0;font-size:12px;color:var(--mute);line-height:1.45}
 .panel .grade{display:inline-block;margin-top:6px;padding:1px 8px;border:1px solid var(--accent);color:var(--accent);border-radius:10px;font-size:12px;font-weight:600}
 .panel .x{position:absolute;top:8px;right:8px;border:0;background:transparent;font-size:22px;line-height:1;cursor:pointer;color:var(--mute);padding:6px 10px}
 .panel .pb{overflow:auto;padding:10px 16px 24px;flex:1}
@@ -124,7 +126,7 @@ footer b{color:var(--ink)}
 .mrow{margin:0 0 10px;padding:8px 10px;border:1px solid var(--line);border-radius:8px}
 .mrow h4{margin:0 0 6px;font-size:14px}
 .mrow h4 small{display:block;font-weight:400;color:var(--mute);font-size:11px}
-.mrow .chip{font-size:14px;padding:9px 10px;margin-bottom:6px}
+.mrow .chip{font-size:14px;padding:9px 10px;margin-bottom:6px;min-height:44px}
 .mrow .chip .n{line-height:20px;font-size:12px}
 .mnone{color:var(--mute);font-size:13px;padding:8px 2px}
 @media (max-width:700px){
@@ -149,7 +151,7 @@ footer b{color:var(--ink)}
   tr.grp th{border-top:2px solid #000;border-bottom:2px solid #000}
   tr{break-inside:avoid}
   tr.grp{break-after:avoid}
-  .chip{font-size:9.5px;padding:2px 4px;margin-bottom:3px;border-color:#000;color:#000;break-inside:avoid}
+  .chip{font-size:9.5px;padding:2px 4px;margin-bottom:3px;border-color:#000;color:#000;break-inside:avoid;min-height:0}
   .chip .n{background:#000;color:#fff;font-size:9px;line-height:14px;min-width:16px}
   .chip.empty{border-style:dashed;color:#555}
   body.q .chip{opacity:1;background:#fff}
@@ -173,8 +175,8 @@ footer b{color:var(--ink)}
   </div>
 </header>
 <div class="legend">
-  <span><span class="chip" style="display:inline-block;width:auto;margin:0">単元名 <span class="n">3</span></span>＝ アプリあり（数字は本数）</span>
-  <span><span class="chip empty" style="display:inline-block;width:auto;margin:0">単元名</span>＝ TKKにアプリなし（押すと戻る先だけ出ます）</span>
+  <span><span class="chip" style="display:inline-flex;width:auto;min-height:0;margin:0"><span class="t">単元名</span><span class="n">3</span></span>＝ アプリあり（数字は本数）</span>
+  <span><span class="chip empty" style="display:inline-flex;width:auto;min-height:0;margin:0"><span class="t">単元名</span></span>＝ TKKにアプリなし（押すと戻る先だけ出ます）</span>
   <span>アプリは新しいタブで開きます。すべて無料・インストール不要</span>
   <span id="hits"></span>
 </div>
@@ -196,6 +198,7 @@ footer b{color:var(--ink)}
   <div class="ph">
     <div class="crumb" id="p-crumb"></div>
     <h2 id="p-title"></h2>
+    <p class="full" id="p-full" hidden></p>
     <span class="grade" id="p-grade"></span>
     <button class="x" id="p-close" type="button" aria-label="閉じる">×</button>
   </div>
@@ -228,8 +231,8 @@ DATA.groups.forEach((grp, gi) => {
         const n = ch.apps.length;
         const key = `${gi}.${ri}.${g}.${ci}`;
         return n
-          ? `<button type="button" class="chip" data-key="${key}">${esc(ch.c)}<span class="n">${n}</span></button>`
-          : `<span class="chip empty" data-key="${key}">${esc(ch.c)}</span>`;
+          ? `<button type="button" class="chip" data-key="${key}"><span class="t">${esc(ch.c)}</span><span class="n">${n}</span></button>`
+          : `<span class="chip empty" data-key="${key}"><span class="t">${esc(ch.c)}</span></span>`;
       }).join("") + "</td>";
     });
     h += "</tr>";
@@ -254,8 +257,8 @@ function renderMobile() {
       m += `<div class="mrow"><h4>${esc(row.name)}${row.sub ? `<small>${esc(row.sub)}</small>` : ""}</h4>` +
         row.cells[mg].map((ch, ci) => {
           const n = ch.apps.length, key = `${gi}.${ri}.${mg}.${ci}`;
-          return n ? `<button type="button" class="chip" data-key="${key}">${esc(ch.c)}<span class="n">${n}</span></button>`
-                   : `<span class="chip empty" data-key="${key}">${esc(ch.c)}</span>`;
+          return n ? `<button type="button" class="chip" data-key="${key}"><span class="t">${esc(ch.c)}</span><span class="n">${n}</span></button>`
+                   : `<span class="chip empty" data-key="${key}"><span class="t">${esc(ch.c)}</span></span>`;
         }).join("") + "</div>";
     });
   });
@@ -301,6 +304,8 @@ function openPanel(key) {
   const { grp, row, g, ch } = locate(key);
   document.getElementById("p-crumb").textContent = `${grp.name} › ${row.name}`;
   document.getElementById("p-title").textContent = ch.c;
+  document.getElementById("p-full").textContent = ch.full || "";
+  document.getElementById("p-full").hidden = !ch.full;
   document.getElementById("p-grade").textContent = g;
   document.getElementById("p-apps").innerHTML = ch.apps.length ? ch.apps.map(appCard).join("") : '<p class="none">この単元にTKKのアプリはありません。下の系統で近い単元を見てください。</p>';
   // chain

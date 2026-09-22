@@ -14,10 +14,11 @@ window.SWEEP = function (label) {
     }
     return (box.r - box.l > 1 && box.b - box.t > 1) ? box : null;
   };
-  const isSticky = e => { for (let p = e; p && p !== document.body; p = p.parentElement) if (getComputedStyle(p).position === 'sticky') return true; return false; };
+  // 別レイヤー判定（誤検出対策）: sticky / fixed / 高z-index の上乗せ層は本文と重なって当然
+  const layerOf = e => { for (let p = e; p && p !== document.body; p = p.parentElement) { const cs = getComputedStyle(p); if (cs.position === 'fixed' || cs.position === 'sticky' || (+cs.zIndex >= 10 && cs.position !== 'static')) return p; } return null; };
   const vis = e => { const cs = getComputedStyle(e); return (cs.visibility !== 'hidden' && cs.display !== 'none' && e.offsetParent !== null) || cs.position === 'fixed'; };
   const all = [...document.querySelectorAll('body *')].filter(e => vis(e) && !['SCRIPT', 'STYLE'].includes(e.tagName));
-  const res = { label, W, pageHScroll: document.documentElement.scrollWidth > W, hOverflow: [], vOverflow: [], orphan: [], textOverlap: [], stickyCover: 0, smallText: [] };
+  const res = { label, W, pageHScroll: document.documentElement.scrollWidth > W, hOverflow: [], vOverflow: [], orphan: [], textOverlap: [], overlayCover: 0, smallText: [] };
   const inScrollBox = e => { for (let p = e.parentElement; p; p = p.parentElement) { const o = getComputedStyle(p).overflowX; if (o === 'auto' || o === 'scroll') return true; } return false; };
   for (const e of all) {
     const r = e.getBoundingClientRect(); if (r.width === 0) continue;
@@ -43,13 +44,21 @@ window.SWEEP = function (label) {
   }
   // 文字どうしの重なり（クリップ後の矩形で）。stickyヘッダが覆うものは別カウント
   const leaves = all.filter(e => [...e.childNodes].some(n => n.nodeType === 3 && n.textContent.trim()));
-  const rects = leaves.map(e => ({ e, r: clipRect(e) })).filter(x => x.r);
+  const textRect = e => { // 直下テキストの実矩形（要素の箱ではなく文字が占める範囲）
+    const box = clipRect(e); if (!box) return null;
+    let l = Infinity, t = Infinity, r = -Infinity, b = -Infinity, any = false;
+    for (const n of e.childNodes) { if (n.nodeType !== 3 || !n.textContent.trim()) continue; const range = document.createRange(); range.selectNodeContents(n);
+      for (const x of range.getClientRects()) { if (x.width < 1) continue; any = true; l = Math.min(l, x.left); t = Math.min(t, x.top); r = Math.max(r, x.right); b = Math.max(b, x.bottom); } }
+    if (!any) return null;
+    return { l: Math.max(l, box.l), t: Math.max(t, box.t), r: Math.min(r, box.r), b: Math.min(b, box.b) };
+  };
+  const rects = leaves.map(e => ({ e, r: textRect(e) })).filter(x => x.r && x.r.r - x.r.l > 1 && x.r.b - x.r.t > 1);
   for (let i = 0; i < rects.length; i++) for (let j = i + 1; j < rects.length; j++) {
     const A = rects[i], B = rects[j]; if (A.e.contains(B.e) || B.e.contains(A.e)) continue;
     const ix = Math.min(A.r.r, B.r.r) - Math.max(A.r.l, B.r.l), iy = Math.min(A.r.b, B.r.b) - Math.max(A.r.t, B.r.t);
-    if (ix > 2 && iy > 2) { if (isSticky(A.e) !== isSticky(B.e)) res.stickyCover++; else res.textOverlap.push(A.e.textContent.trim().slice(0, 15) + ' × ' + B.e.textContent.trim().slice(0, 15)); }
+    if (ix > 2 && iy > 2) { if (layerOf(A.e) !== layerOf(B.e)) res.overlayCover++; else res.textOverlap.push(A.e.textContent.trim().slice(0, 15) + ' × ' + B.e.textContent.trim().slice(0, 15)); }
   }
-  res.counts = { hOverflow: res.hOverflow.length, vOverflow: res.vOverflow.length, orphan: res.orphan.length, textOverlap: res.textOverlap.length, smallText: res.smallText.length, stickyCover: res.stickyCover };
+  res.counts = { hOverflow: res.hOverflow.length, vOverflow: res.vOverflow.length, orphan: res.orphan.length, textOverlap: res.textOverlap.length, smallText: res.smallText.length, overlayCover: res.overlayCover };
   for (const k of ['hOverflow', 'vOverflow', 'orphan', 'textOverlap', 'smallText']) res[k] = res[k].slice(0, 10);
   return res;
 };
