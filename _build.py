@@ -13,8 +13,13 @@ HERE = Path(__file__).parent
 keito = json.loads((HERE / "keito.json").read_text(encoding="utf-8"))
 arts = json.loads((HERE / "_src" / "tkk_articles_full.json").read_text(encoding="utf-8"))
 
+# 同梱フォント(Zen Maru Gothic)に無い字は、形の近い字へ置き換える（1字だけ別フォントになるのを防ぐ）
+FONT_SUB = {"―": "—"}  # ― → —
+
 def clean_title(t):
     t = re.sub(r"^(?:【作成中】|作成中)?(?:【[^】]+】)+", "", t).strip()
+    for a, b in FONT_SUB.items():
+        t = t.replace(a, b)
     return t
 
 def find(key):
