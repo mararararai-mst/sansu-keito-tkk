@@ -3,15 +3,15 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>小学校算数 アプリ系統表</title>
-<meta name="description" content="特別支援教材開発研究所（TKK）の無料算数アプリを、学習指導要領の系統（領域×学年）にならべたリンク集。単元を押すとアプリと「つまずいたら戻る先」が出ます。">
-<meta property="og:title" content="小学校算数 アプリ系統表">
-<meta property="og:description" content="TKKの無料算数アプリを学習指導要領の系統にならべたリンク集。単元を押すとアプリと戻る先が出ます。">
+<title>__TITLE__</title>
+<meta name="description" content="__DESC__">
+<meta property="og:title" content="__TITLE__">
+<meta property="og:description" content="__DESC__">
 <meta property="og:type" content="website">
-<link rel="canonical" href="https://mararararai-mst.github.io/sansu-keito-tkk/">
+<link rel="canonical" href="__CANON__">
 <meta name="keywords" content="小学校 算数,算数 アプリ,無料 教材,学習指導要領 系統表,特別支援,つまずき,さかのぼり,小1 小2 小3 小4 小5 小6">
-<meta property="og:url" content="https://mararararai-mst.github.io/sansu-keito-tkk/">
-<meta property="og:site_name" content="小学校算数 アプリ系統表">
+<meta property="og:url" content="__CANON__">
+<meta property="og:site_name" content="__TITLE__">
 <meta property="og:locale" content="ja_JP">
 <meta property="og:image" content="https://mararararai-mst.github.io/sansu-keito-tkk/ogp.png">
 <meta property="og:image:width" content="1200">
@@ -55,6 +55,11 @@ button{font-family:inherit}
 .ctrl input{width:260px;max-width:60vw;padding:8px 10px;border:1px solid var(--line);border-radius:6px;font-size:14px}
 .ctrl button{padding:8px 12px;border:1px solid var(--line);background:#fff;border-radius:6px;cursor:pointer}
 .ctrl button:hover{background:var(--head)}
+.boards{display:flex;gap:8px;padding:8px 20px 0;flex-wrap:wrap;align-items:center}
+.boards a{padding:6px 14px;border:1px solid var(--line);border-radius:16px;background:#fff;color:var(--chip-ink);text-decoration:none;font-size:13px;font-weight:600}
+.boards a:hover{background:var(--chip-hover);border-color:var(--accent)}
+.boards a[aria-current]{background:var(--accent);border-color:var(--accent);color:#fff}
+.boards .lbl{color:var(--mute);font-size:12px;margin-right:2px}
 .legend{display:flex;flex-wrap:wrap;gap:6px 14px;padding:9px 20px;background:#f7f8fa;border-bottom:1px solid var(--line);color:var(--ink);font-size:12.5px;align-items:center;line-height:1.5}
 .legend .chip{pointer-events:none;font-size:12px;margin-right:2px}
 .legend .it{display:flex;align-items:center;gap:2px}
@@ -203,19 +208,20 @@ b,strong,.chip .n,.tl .go{font-weight:700}
 <body>
 <header class="top">
   <div class="ttl">
-    <h1>小学校算数 アプリ系統表</h1>
-    <p class="sub">特別支援教材開発研究所（TKK）の無料アプリ __NAPPS__ 本を、学習指導要領の系統でならべたリンク集</p>
+    <h1>__TITLE__</h1>
+    <p class="sub">__SUB__</p>
   </div>
   <div class="ctrl">
     <input id="q" type="search" placeholder="さがす（例：筆算、時計、分数）" autocomplete="off">
     <button id="print" type="button">印刷</button>
   </div>
 </header>
+<nav class="boards" id="boards"></nav>
 <div class="legend">
-  <span class="it"><b>単元を押すと</b>、アプリと「つまずいたら戻る先」が出ます</span>
+  <span class="it"><b>__LEG1__</b>__LEG2__</span>
   <span class="sep"></span>
-  <span class="it"><span class="chip" style="display:inline-flex;width:auto;min-height:0;margin:0"><span class="t">単元名</span><span class="n">3</span></span>アプリあり（数字は本数）</span>
-  <span class="it"><span class="chip empty" style="display:inline-flex;width:auto;min-height:0;margin:0"><span class="t">単元名</span></span>アプリなし（戻る先だけ出ます）</span>
+  <span class="it"><span class="chip" style="display:inline-flex;width:auto;min-height:0;margin:0"><span class="t">__UNIT__</span><span class="n">3</span></span>アプリあり（数字は本数）</span>
+  <span class="it"><span class="chip empty" style="display:inline-flex;width:auto;min-height:0;margin:0"><span class="t">__UNIT__</span></span>__LEG3__</span>
   <span class="sep"></span>
   <span class="note">すべて無料・インストール不要</span>
   <span id="hits"></span>
@@ -227,8 +233,8 @@ b,strong,.chip .n,.tl .go{font-weight:700}
 </div>
 <section class="tools" id="tools"></section>
 <footer>
-  <b>使い方の目安</b>：授業で使う → その学年の列から選ぶ／つまずいている子に → 単元を押して「この系統をたどる」を左（下の学年）へ戻る<br>
-  <b>系統の出典</b>：文部科学省『小学校学習指導要領（平成29年告示）解説 算数編』第1章 図1「小学校算数科の内容の構成」（pp.12-15）の文言を短くしたもの。「お金」は指導要領の算数にはない内容（生活・自立活動）<br>
+  <b>使い方の目安</b>：__HOWTO__<br>
+  <b>枠組みの出典</b>：__SOURCE__<br>
   <b>アプリの出典</b>：<a href="https://tkk-fk.com/" target="_blank" rel="noopener">特別支援教材開発研究所（TKK）</a>。各アプリの著作権はTKKにあります。このページはリンク集で、アプリ本体は含みません<br>
   <b>注意</b>：アプリをどの単元に置くかは作成者（あらい）の判断で、TKK公式の分類ではありません。ずれに気づいたら教えてください
 </footer>
@@ -245,7 +251,7 @@ b,strong,.chip .n,.tl .go{font-weight:700}
   <div class="pb">
     <h3>アプリ</h3>
     <div id="p-apps"></div>
-    <h3>この系統をたどる（上が下の学年）</h3>
+    <h3 id="p-chain-h"></h3>
     <ul class="chain" id="p-chain"></ul>
     <div id="p-before"></div>
   </div>
@@ -259,7 +265,7 @@ const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":
 
 // ---- table
 const tbl = document.getElementById("tbl");
-let h = '<thead><tr><th>領域／系統</th>' + G.map(g => `<th>${esc(g)}</th>`).join("") + '</tr></thead><tbody>';
+let h = `<thead><tr><th>${esc(DATA.colHead || "領域／系統")}</th>` + G.map(g => `<th>${esc(g)}</th>`).join("") + '</tr></thead><tbody>';
 DATA.groups.forEach((grp, gi) => {
   const t = tintOf(grp.name);
   h += `<tr class="grp" data-tint="${t}"><th colspan="${G.length + 1}">${esc(grp.name)}</th></tr>`;
@@ -280,6 +286,13 @@ DATA.groups.forEach((grp, gi) => {
 });
 h += "</tbody>";
 tbl.innerHTML = h;
+
+// ---- boards（3つの表を行き来）
+const nav = document.getElementById("boards");
+if (DATA.boards && DATA.boards.length) {
+  nav.innerHTML = '<span class="lbl">ほかの表</span>' + DATA.boards.map(b =>
+    `<a href="${esc(b.href)}"${b.href === DATA.self ? ' aria-current="page"' : ""}>${esc(b.label)}</a>`).join("");
+} else nav.hidden = true;
 
 // ---- mobile（学年を選んで縦に見る）
 const gsel = document.getElementById("gsel"), mlist = document.getElementById("mlist");
@@ -360,6 +373,7 @@ function openPanel(key) {
       c += `<li class="${now ? "now" : ""} ${cc.apps.length ? "" : "noapp"}"><span class="dot"></span><button type="button" data-go="${k2}"><span>${esc(cc.c)}</span><span class="cnt" title="${cc.apps.length ? "アプリ" + cc.apps.length + "本" : "アプリなし"}">${cc.apps.length || "－"}</span></button></li>`;
     });
   });
+  document.getElementById("p-chain-h").textContent = DATA.chainTitle || "この系統をたどる（上が下の学年）";
   document.getElementById("p-chain").innerHTML = c;
   // もっと前（別の系統）に戻る
   const gi0 = G.indexOf(g);
@@ -379,7 +393,7 @@ function openPanel(key) {
     if (!pick) return;
     b += `<div class="bef"><button type="button" data-go="${tg}.${tri}.${pick.gg}.${pick.ci}">← ${esc(trow.name)}へ戻る（${esc(pick.gg)} ${esc(pick.cc.c)}）</button><div class="why">${esc(bf.why)}</div></div>`;
   });
-  document.getElementById("p-before").innerHTML = b ? '<h3>もっと前に戻るなら（別の系統）</h3>' + b : "";
+  document.getElementById("p-before").innerHTML = b ? '<h3>' + esc(DATA.beforeTitle || "もっと前に戻るなら（別の系統）") + '</h3>' + b : "";
   document.querySelectorAll(".chip.on").forEach(e => e.classList.remove("on"));
   document.querySelectorAll(`.chip[data-key="${key}"]`).forEach(el => { el.classList.add("on"); if (el.offsetParent) el.scrollIntoView({ block: "nearest", inline: "nearest" }); });
   panel.hidden = false; shade.hidden = false;

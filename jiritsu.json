@@ -1,0 +1,446 @@
+{
+  "_note": "枠組みは 文科省『特別支援学校教育要領・学習指導要領解説 自立活動編（幼稚部・小学部・中学部）平成30年3月』第6章「自立活動の内容」の6区分27項目。区分名・項目名は同解説の表記どおり。apps の当てはめは あらい（Claude作成）の判断で、TKK公式の分類ではない。",
+  "colHead": "区分",
+  "chainTitle": "同じ区分のほかの項目",
+  "beforeTitle": "近い区分も見るなら",
+  "text": {
+    "TITLE": "自立活動 アプリ一覧（6区分27項目）",
+    "DESC": "特別支援教材開発研究所（TKK）の無料アプリを、自立活動の6区分27項目にならべた一覧。項目を押すとアプリが開きます。",
+    "SUB": "特別支援教材開発研究所（TKK）の無料アプリ __NAPPS__ 本を、自立活動の6区分27項目にならべた一覧",
+    "CANON": "https://mararararai-mst.github.io/sansu-keito-tkk/jiritsu.html",
+    "SOURCE": "文部科学省『特別支援学校教育要領・学習指導要領解説 自立活動編（幼稚部・小学部・中学部）平成30年3月』第6章「自立活動の内容」6区分27項目。区分名・項目名は同解説の表記どおり",
+    "HOWTO": "個別の指導計画を書くとき → 区分の行から項目を選ぶ／子どもの姿から入るとき → 項目を押して中身を見る。区分ごと・項目ごとに別々に指導するものではありません",
+    "UNIT": "項目名",
+    "LEG1": "項目を押すと",
+    "LEG2": "、アプリと指導要領の文言が出ます",
+    "LEG3": "アプリなし（文言だけ出ます）"
+  },
+  "grades": [
+    "（1）",
+    "（2）",
+    "（3）",
+    "（4）",
+    "（5）"
+  ],
+  "groups": [
+    {
+      "name": "自立活動の内容（6区分27項目）",
+      "rows": [
+        {
+          "id": "kenko",
+          "name": "1 健康の保持",
+          "sub": "生活のリズム・健康状態の理解と管理",
+          "before": [],
+          "cells": {
+            "（1）": [
+              {
+                "c": "生活のリズム・生活習慣",
+                "full": "（1）生活のリズムや生活習慣の形成に関すること。",
+                "apps": [
+                  "mito-si-bode",
+                  "mitosi-f",
+                  "step-chart",
+                  "t:メモタイマー",
+                  "toothbrushing-videos"
+                ]
+              }
+            ],
+            "（2）": [
+              {
+                "c": "病気の理解と生活管理",
+                "full": "（2）病気の状態の理解と生活管理に関すること。",
+                "apps": []
+              }
+            ],
+            "（3）": [
+              {
+                "c": "身体各部の理解と養護",
+                "full": "（3）身体各部の状態の理解と養護に関すること。",
+                "apps": []
+              }
+            ],
+            "（4）": [
+              {
+                "c": "障害の特性の理解と環境調整",
+                "full": "（4）障害の特性の理解と生活環境の調整に関すること。平成30年改訂で新設された項目",
+                "apps": [
+                  "mytorisetsu",
+                  "miekata"
+                ]
+              }
+            ],
+            "（5）": [
+              {
+                "c": "健康状態の維持・改善",
+                "full": "（5）健康状態の維持・改善に関すること。",
+                "apps": []
+              }
+            ]
+          }
+        },
+        {
+          "id": "shinri",
+          "name": "2 心理的な安定",
+          "sub": "情緒・変化への対応・意欲",
+          "before": [
+            {
+              "row": "kenko",
+              "why": "気持ちが不安定なとき、まず生活のリズムを見る",
+              "grade": "（1）",
+              "chip": "生活のリズム"
+            }
+          ],
+          "cells": {
+            "（1）": [
+              {
+                "c": "情緒の安定",
+                "full": "（1）情緒の安定に関すること。",
+                "apps": [
+                  "ondokei",
+                  "kimotinowa",
+                  "black-hole-intelligence",
+                  "shiiru-asobi-app",
+                  "arigato",
+                  "t:ロバの耳",
+                  "chaos-pendulum"
+                ]
+              }
+            ],
+            "（2）": [
+              {
+                "c": "状況の理解と変化",
+                "full": "（2）状況の理解と変化への対応に関すること。",
+                "apps": [
+                  "mito-si-bode",
+                  "mitosi-f",
+                  "kyoukinouashita",
+                  "calendar-reading-flashcard"
+                ]
+              }
+            ],
+            "（3）": [
+              {
+                "c": "困難を改善する意欲",
+                "full": "（3）障害による学習上又は生活上の困難を改善・克服する意欲に関すること。",
+                "apps": [
+                  "kaerarerumono-kaerarenaimono",
+                  "mytorisetsu"
+                ]
+              }
+            ],
+            "（4）": [],
+            "（5）": []
+          }
+        },
+        {
+          "id": "ningen",
+          "name": "3 人間関係の形成",
+          "sub": "他者理解・自己理解・集団参加",
+          "before": [
+            {
+              "row": "shinri",
+              "why": "人と関わる前に、その子の情緒が落ち着いているか",
+              "grade": "（1）",
+              "chip": "情緒の安定"
+            }
+          ],
+          "cells": {
+            "（1）": [
+              {
+                "c": "他者とのかかわり",
+                "full": "（1）他者とのかかわりの基礎に関すること。",
+                "apps": [
+                  "saikoro-talk-app"
+                ]
+              }
+            ],
+            "（2）": [
+              {
+                "c": "他者の意図や感情",
+                "full": "（2）他者の意図や感情の理解に関すること。",
+                "apps": [
+                  "kimochi-flashcards",
+                  "fuwafuwa-board",
+                  "shiwake-board"
+                ]
+              }
+            ],
+            "（3）": [
+              {
+                "c": "自己理解と行動の調整",
+                "full": "（3）自己の理解と行動の調整に関すること。",
+                "apps": [
+                  "kokoro-no-wakewake",
+                  "choice-board",
+                  "mytorisetsu",
+                  "girigiri-stop-game"
+                ]
+              }
+            ],
+            "（4）": [
+              {
+                "c": "集団への参加の基礎",
+                "full": "（4）集団への参加の基礎に関すること。",
+                "apps": [
+                  "janken-oboeyou",
+                  "web-roulette",
+                  "amida-kuji",
+                  "custom-web-bingo-card",
+                  "custom-bingo-machine",
+                  "tournament-maker"
+                ]
+              }
+            ],
+            "（5）": []
+          }
+        },
+        {
+          "id": "kankyo",
+          "name": "4 環境の把握",
+          "sub": "感覚の活用・概念の形成",
+          "before": [
+            {
+              "row": "kenko",
+              "why": "見えにくさ聞こえにくさは、まず身体の状態から",
+              "grade": "（4）",
+              "chip": "障害の特性"
+            }
+          ],
+          "cells": {
+            "（1）": [
+              {
+                "c": "保有する感覚の活用",
+                "full": "（1）保有する感覚の活用に関すること。",
+                "apps": [
+                  "siryoku",
+                  "tyouryoku",
+                  "voice-check"
+                ]
+              }
+            ],
+            "（2）": [
+              {
+                "c": "感覚・認知の特性と対応",
+                "full": "（2）感覚や認知の特性についての理解と対応に関すること。平成30年改訂で「感覚や認知の特性への対応」から改められた",
+                "apps": [
+                  "miekata"
+                ]
+              }
+            ],
+            "（3）": [
+              {
+                "c": "補助・代行手段の活用",
+                "full": "（3）感覚の補助及び代行手段の活用に関すること。",
+                "apps": []
+              }
+            ],
+            "（4）": [
+              {
+                "c": "感覚を総合して状況把握",
+                "full": "（4）感覚を総合的に活用した周囲の状況についての把握と状況に応じた行動に関すること。平成30年改訂で「状況に応じた行動」が加えられた",
+                "apps": [
+                  "traffic-signal-practice"
+                ]
+              }
+            ],
+            "（5）": [
+              {
+                "c": "概念の形成",
+                "full": "（5）認知や行動の手掛かりとなる概念の形成に関すること。",
+                "apps": [
+                  "updownleftright",
+                  "gokiburi",
+                  "vision-training-maze-game",
+                  "t:ちいさいじゅん",
+                  "t:タップで５０",
+                  "calendar-print"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "id": "shintai",
+          "name": "5 身体の動き",
+          "sub": "姿勢・基本動作・作業",
+          "before": [
+            {
+              "row": "kankyo",
+              "why": "動きの前に、見え方や体の感じ方を確かめる",
+              "grade": "（1）",
+              "chip": "保有する感覚"
+            }
+          ],
+          "cells": {
+            "（1）": [
+              {
+                "c": "姿勢と運動・動作の基本",
+                "full": "（1）姿勢と運動・動作の基本的技能に関すること。",
+                "apps": [
+                  "timeback-camera",
+                  "motion-compare"
+                ]
+              }
+            ],
+            "（2）": [
+              {
+                "c": "補助的手段の活用",
+                "full": "（2）姿勢保持と運動・動作の補助的手段の活用に関すること。",
+                "apps": []
+              }
+            ],
+            "（3）": [
+              {
+                "c": "日常生活の基本動作",
+                "full": "（3）日常生活に必要な基本動作に関すること。",
+                "apps": [
+                  "step-chart",
+                  "tyoucyo-musubi"
+                ]
+              }
+            ],
+            "（4）": [
+              {
+                "c": "身体の移動能力",
+                "full": "（4）身体の移動能力に関すること。",
+                "apps": []
+              }
+            ],
+            "（5）": [
+              {
+                "c": "作業に必要な動作",
+                "full": "（5）作業に必要な動作と円滑な遂行に関すること。",
+                "apps": [
+                  "t:棒キャッチ",
+                  "typing-individual",
+                  "nikukyuu-stamp"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "id": "comm",
+          "name": "6 コミュニケーション",
+          "sub": "受容と表出・手段の選択・場に応じて",
+          "before": [
+            {
+              "row": "ningen",
+              "why": "伝える前に、相手と関われているか",
+              "grade": "（1）",
+              "chip": "他者とのかかわり"
+            }
+          ],
+          "cells": {
+            "（1）": [
+              {
+                "c": "やりとりの基礎",
+                "full": "（1）コミュニケーションの基礎的能力に関すること。",
+                "apps": [
+                  "voice-check",
+                  "saikoro-talk-app"
+                ]
+              }
+            ],
+            "（2）": [
+              {
+                "c": "言語の受容と表出",
+                "full": "（2）言語の受容と表出に関すること。",
+                "apps": [
+                  "kimochi-sos",
+                  "kimoti",
+                  "kimochi-flashcards"
+                ]
+              }
+            ],
+            "（3）": [
+              {
+                "c": "言語の形成と活用",
+                "full": "（3）言語の形成と活用に関すること。",
+                "apps": [
+                  "itsu-doko-dare-game",
+                  "t:ことばシャワー",
+                  "word-search"
+                ]
+              }
+            ],
+            "（4）": [
+              {
+                "c": "手段の選択と活用",
+                "full": "（4）コミュニケーション手段の選択と活用に関すること。",
+                "apps": [
+                  "help",
+                  "card-maker",
+                  "choice-board",
+                  "typing-copy"
+                ]
+              }
+            ],
+            "（5）": [
+              {
+                "c": "状況に応じた伝え方",
+                "full": "（5）状況に応じたコミュニケーションに関すること。",
+                "apps": [
+                  "koe-monosashi",
+                  "voice-signal",
+                  "koenoookisa",
+                  "money-app",
+                  "fuwafuwa-board"
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "tools": {
+    "name": "先生の道具",
+    "sub": "自立活動の時間づくりに使うもの",
+    "items": [
+      {
+        "g": "時間の見える化",
+        "apps": [
+          "timetimer",
+          "timetimer60",
+          "time-timer-routine",
+          "analog-clock-timer",
+          "analog-time-timer-schedule",
+          "dotstimer",
+          "drawing-timer",
+          "visible-time-stopwatch",
+          "life-time-timer"
+        ]
+      },
+      {
+        "g": "見通し・手順",
+        "apps": [
+          "mito-si-bode",
+          "mitosi-f",
+          "step-chart",
+          "t:メモタイマー",
+          "calendar-print"
+        ]
+      },
+      {
+        "g": "くじ・グループ分け",
+        "apps": [
+          "web-roulette",
+          "amida-kuji",
+          "custom-bingo-machine",
+          "custom-web-bingo-card",
+          "tournament-maker",
+          "league-table-maker",
+          "sekigae-app"
+        ]
+      },
+      {
+        "g": "カードづくり",
+        "apps": [
+          "card-maker",
+          "koe-monosashi"
+        ]
+      }
+    ]
+  }
+}

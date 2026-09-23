@@ -1,20 +1,29 @@
 # -*- coding: utf-8 -*-
 """
-算数アプリ系統表（TKK）ビルド
-  keito.json（系統表＋アプリ当てはめ）
-  _src/tkk_articles_full.json（tkk-fk.com の記事一覧・アプリ直リンク。スクレイプ結果）
-  _template.html
-  → index.html と 算数アプリ系統表.html（同一内容）
+TKKアプリ系統表ビルド（算数・国語・自立活動）
+
+  <board>.json          系統（枠組み）＋アプリの当てはめ
+  _src/tkk_articles_full.json   tkk-fk.com の記事一覧・アプリ直リンク（スクレイプ結果）
+  _template.html        ひな形
+  → index.html / kokugo.html / jiritsu.html と、それぞれの日本語名コピー
 """
-import json, re, shutil, sys, urllib.parse
+import json, re, sys, urllib.parse
 from pathlib import Path
 
 HERE = Path(__file__).parent
-keito = json.loads((HERE / "keito.json").read_text(encoding="utf-8"))
 arts = json.loads((HERE / "_src" / "tkk_articles_full.json").read_text(encoding="utf-8"))
+
+# 表を足すときはここに1行足して <key>.json を置く
+BOARDS = [
+    {"key": "sansu",   "src": "keito.json",   "out": "index.html",   "label": "算数",     "jp": "算数アプリ系統表.html"},
+    {"key": "kokugo",  "src": "kokugo.json",  "out": "kokugo.html",  "label": "国語",     "jp": "国語アプリ系統表.html"},
+    {"key": "jiritsu", "src": "jiritsu.json", "out": "jiritsu.html", "label": "自立活動", "jp": "自立活動アプリ一覧.html"},
+]
+NAV = [{"label": b["label"], "href": b["out"]} for b in BOARDS]
 
 # 同梱フォント(Zen Maru Gothic)に無い字は、形の近い字へ置き換える（1字だけ別フォントになるのを防ぐ）
 FONT_SUB = {"―": "—"}  # ― → —
+
 
 def clean_title(t):
     t = re.sub(r"^(?:【作成中】|作成中)?(?:【[^】]+】)+", "", t).strip()
@@ -22,7 +31,9 @@ def clean_title(t):
         t = t.replace(a, b)
     return t
 
+
 def find(key):
+    """keito.json の apps に書いたキーを、TKKの記事1件に解決する"""
     if key.startswith("t:"):
         q = key[2:]
         hits = [a for a in arts if q in a["title"]]
@@ -46,39 +57,68 @@ def find(key):
         "d3": "３Dプリント" in a["title"] or "3Dプリント" in a["title"],
     }
 
-apps = {}
-missing = []
-def reg(key):
-    if key in apps:
-        return
-    a = find(key)
-    if a: apps[key] = a
-    else: missing.append(key)
 
-for g in keito["groups"]:
-    for r in g["rows"]:
-        for grade, chips in r["cells"].items():
-            for ch in chips:
-                for k in ch["apps"]:
-                    reg(k)
-for it in keito["tools"]["items"]:
-    for k in it["apps"]:
-        reg(k)
+def build(board, tpl):
+    cfg = json.loads((HERE / board["src"]).read_text(encoding="utf-8"))
+    apps, missing = {}, []
 
-if missing:
-    print("未解決キー:", missing, file=sys.stderr)
-    sys.exit(1)
+    def reg(key):
+        if key in apps:
+            return
+        a = find(key)
+        if a:
+            apps[key] = a
+        else:
+            missing.append(key)
 
-data = {"grades": keito["grades"], "groups": keito["groups"], "tools": keito["tools"], "apps": apps}
-n_apps = len(apps)
-n_chips = sum(len(chips) for g in keito["groups"] for r in g["rows"] for chips in r["cells"].values())
+    for g in cfg["groups"]:
+        for r in g["rows"]:
+            for chips in r["cells"].values():
+                for ch in chips:
+                    for k in ch["apps"]:
+                        reg(k)
+    for it in cfg.get("tools", {}).get("items", []):
+        for k in it["apps"]:
+            reg(k)
+    if missing:
+        print(f"[{board['key']}] 未解決キー: {missing}", file=sys.stderr)
+        sys.exit(1)
 
-tpl = (HERE / "_template.html").read_text(encoding="utf-8")
-html = tpl.replace("/*__DATA__*/", json.dumps(data, ensure_ascii=False))
-html = html.replace("__NAPPS__", str(n_apps)).replace("__NCHIPS__", str(n_chips))
-(HERE / "index.html").write_text(html, encoding="utf-8")
-# 日本語名の配布用コピー（中身は同じ）。検索エンジンには index.html を正とみなしてもらう
-NOINDEX = '<meta name="robots" content="noindex">' + chr(10) + '<link rel="canonical"'
-(HERE / "算数アプリ系統表.html").write_text(
-    html.replace('<link rel="canonical"', NOINDEX, 1), encoding="utf-8")
-print(f"OK apps={n_apps} chips={n_chips} -> index.html / 算数アプリ系統表.html")
+    data = {
+        "grades": cfg["grades"],
+        "groups": cfg["groups"],
+        "tools": cfg.get("tools", {"name": "", "sub": "", "items": []}),
+        "apps": apps,
+        "boards": NAV,
+        "self": board["out"],
+        "colHead": cfg.get("colHead", "領域／系統"),
+        "chainTitle": cfg.get("chainTitle", "この系統をたどる（上が下の学年）"),
+        "beforeTitle": cfg.get("beforeTitle", "もっと前に戻るなら（別の系統）"),
+    }
+    n_chips = sum(len(c) for g in cfg["groups"] for r in g["rows"] for c in r["cells"].values())
+
+    html = tpl.replace("/*__DATA__*/", json.dumps(data, ensure_ascii=False))
+    for k, v in cfg.get("text", {}).items():          # 先に表ごとの文言を入れる
+        html = html.replace("__%s__" % k, v)
+    html = html.replace("__NAPPS__", str(len(apps))).replace("__NCHIPS__", str(n_chips))
+    (HERE / board["out"]).write_text(html, encoding="utf-8")
+
+    # 日本語名の配布用コピー（中身は同じ）。検索エンジンには英語名の方を正とみなしてもらう
+    noindex = '<meta name="robots" content="noindex">' + chr(10) + '<link rel="canonical"'
+    (HERE / board["jp"]).write_text(html.replace('<link rel="canonical"', noindex, 1), encoding="utf-8")
+    print(f"OK {board['key']:8s} apps={len(apps):3d} chips={n_chips:3d} -> {board['out']} / {board['jp']}")
+
+
+def main():
+    tpl = (HERE / "_template.html").read_text(encoding="utf-8")
+    only = sys.argv[1] if len(sys.argv) > 1 else None
+    for b in BOARDS:
+        if only and b["key"] != only:
+            continue
+        if not (HERE / b["src"]).exists():
+            print(f"-- {b['key']}: {b['src']} が無いので飛ばす")
+            continue
+        build(b, tpl)
+
+
+main()
