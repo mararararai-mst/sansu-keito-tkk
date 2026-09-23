@@ -47,17 +47,20 @@
 html,body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);font-size:14px;line-height:1.5;text-wrap:pretty;word-break:auto-phrase}
 a{color:var(--accent)}
 button{font-family:inherit}
-.top{display:flex;flex-wrap:wrap;gap:12px 24px;align-items:flex-end;padding:18px 20px 10px;border-bottom:1px solid var(--line)}
+.top{display:flex;flex-wrap:wrap;gap:10px 24px;align-items:center;padding:14px 20px;border-bottom:1px solid var(--line)}
+.top .ttl{flex:1 1 380px;min-width:0}
 .top h1{margin:0;font-size:22px;letter-spacing:.02em}
-.top .sub{margin:4px 0 0;color:var(--mute);font-size:13px}
-.top .sub b{color:var(--ink);font-weight:600}
-.ctrl{display:flex;gap:8px;margin-left:auto;align-items:center}
+.top .sub{margin:3px 0 0;color:var(--mute);font-size:13px}
+.ctrl{display:flex;gap:8px;margin-left:auto;align-items:center;flex:0 0 auto}
 .ctrl input{width:260px;max-width:60vw;padding:8px 10px;border:1px solid var(--line);border-radius:6px;font-size:14px}
 .ctrl button{padding:8px 12px;border:1px solid var(--line);background:#fff;border-radius:6px;cursor:pointer}
 .ctrl button:hover{background:var(--head)}
-.legend{display:flex;flex-wrap:wrap;gap:8px 18px;padding:8px 20px;color:var(--mute);font-size:12px;align-items:center}
-.legend .chip{pointer-events:none;font-size:12px}
-.legend #hits{margin-left:auto;color:var(--ink)}
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;padding:9px 20px;background:#f7f8fa;border-bottom:1px solid var(--line);color:var(--ink);font-size:12.5px;align-items:center;line-height:1.5}
+.legend .chip{pointer-events:none;font-size:12px;margin-right:2px}
+.legend .it{display:flex;align-items:center;gap:2px}
+.legend .note{color:var(--mute)}
+.legend .sep{width:1px;height:16px;background:var(--line)}
+.legend #hits{margin-left:auto;color:var(--accent);font-weight:700}
 .tblwrap{overflow:auto;max-height:calc(100vh - 150px);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
 table{border-collapse:separate;border-spacing:0;min-width:1420px;width:100%}
 th,td{border-right:1px solid var(--line);border-bottom:1px solid var(--line);vertical-align:top;padding:6px}
@@ -164,6 +167,8 @@ b,strong,.chip .n,.tl .go{font-weight:700}
 @media (max-width:700px){
   .tblwrap{display:none}
   #mobile{display:block}
+  .legend .sep{display:none}
+  .legend{gap:5px 12px}
   .app .ab a{padding:10px 16px;font-size:15px}
   .panel .x{font-size:28px;padding:8px 14px}
   .top{padding:12px 14px 8px}.top h1{font-size:18px}
@@ -199,7 +204,7 @@ b,strong,.chip .n,.tl .go{font-weight:700}
 <header class="top">
   <div class="ttl">
     <h1>小学校算数 アプリ系統表</h1>
-    <p class="sub">特別支援教材開発研究所（TKK）の無料アプリ __NAPPS__ 本を、学習指導要領の系統（領域×学年）にならべました。<b>単元を押す → アプリと「つまずいたら戻る先」が出ます</b></p>
+    <p class="sub">特別支援教材開発研究所（TKK）の無料アプリ __NAPPS__ 本を、学習指導要領の系統でならべたリンク集</p>
   </div>
   <div class="ctrl">
     <input id="q" type="search" placeholder="さがす（例：筆算、時計、分数）" autocomplete="off">
@@ -207,9 +212,12 @@ b,strong,.chip .n,.tl .go{font-weight:700}
   </div>
 </header>
 <div class="legend">
-  <span><span class="chip" style="display:inline-flex;width:auto;min-height:0;margin:0"><span class="t">単元名</span><span class="n">3</span></span>＝ アプリあり（数字は本数）</span>
-  <span><span class="chip empty" style="display:inline-flex;width:auto;min-height:0;margin:0"><span class="t">単元名</span></span>＝ TKKにアプリなし（押すと戻る先だけ出ます）</span>
-  <span>アプリは新しいタブで開きます。すべて無料・インストール不要</span>
+  <span class="it"><b>単元を押すと</b>、アプリと「つまずいたら戻る先」が出ます</span>
+  <span class="sep"></span>
+  <span class="it"><span class="chip" style="display:inline-flex;width:auto;min-height:0;margin:0"><span class="t">単元名</span><span class="n">3</span></span>アプリあり（数字は本数）</span>
+  <span class="it"><span class="chip empty" style="display:inline-flex;width:auto;min-height:0;margin:0"><span class="t">単元名</span></span>アプリなし（戻る先だけ出ます）</span>
+  <span class="sep"></span>
+  <span class="note">すべて無料・インストール不要</span>
   <span id="hits"></span>
 </div>
 <div class="tblwrap"><table id="tbl"></table></div>
