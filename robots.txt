@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /算数アプリ系統表.html
+
+Sitemap: https://mararararai-mst.github.io/sansu-keito-tkk/sitemap.xml

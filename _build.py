@@ -77,5 +77,8 @@ tpl = (HERE / "_template.html").read_text(encoding="utf-8")
 html = tpl.replace("/*__DATA__*/", json.dumps(data, ensure_ascii=False))
 html = html.replace("__NAPPS__", str(n_apps)).replace("__NCHIPS__", str(n_chips))
 (HERE / "index.html").write_text(html, encoding="utf-8")
-shutil.copyfile(HERE / "index.html", HERE / "算数アプリ系統表.html")
+# 日本語名の配布用コピー（中身は同じ）。検索エンジンには index.html を正とみなしてもらう
+NOINDEX = '<meta name="robots" content="noindex">' + chr(10) + '<link rel="canonical"'
+(HERE / "算数アプリ系統表.html").write_text(
+    html.replace('<link rel="canonical"', NOINDEX, 1), encoding="utf-8")
 print(f"OK apps={n_apps} chips={n_chips} -> index.html / 算数アプリ系統表.html")
