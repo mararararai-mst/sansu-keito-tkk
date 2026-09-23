@@ -94,6 +94,7 @@ def build(board, tpl):
         "colHead": cfg.get("colHead", "領域／系統"),
         "chainTitle": cfg.get("chainTitle", "この系統をたどる（上が下の学年）"),
         "beforeTitle": cfg.get("beforeTitle", "もっと前に戻るなら（別の系統）"),
+        "nowLabel": cfg.get("nowLabel", "いま見ている学年"),
     }
     n_chips = sum(len(c) for g in cfg["groups"] for r in g["rows"] for c in r["cells"].values())
 
@@ -119,6 +120,13 @@ def main():
             print(f"-- {b['key']}: {b['src']} が無いので飛ばす")
             continue
         build(b, tpl)
+    # 同梱フォントに無い字が増えていないか（文言を足したら _font.py で作り直す）
+    import subprocess
+    r = subprocess.run([sys.executable, str(HERE / "_font.py"), "--check"], capture_output=True,
+                       text=True, encoding="utf-8", env={**__import__("os").environ, "PYTHONIOENCODING": "utf-8"})
+    if r.returncode:
+        print("!! 同梱フォントに無い字があります。python _font.py で作り直してください", file=sys.stderr)
+        print(r.stdout, file=sys.stderr)
 
 
 main()

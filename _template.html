@@ -119,6 +119,8 @@ b,strong,.chip .n,.tl .go{font-weight:700}
 #shade{position:fixed;inset:0;background:rgba(20,30,40,.25);z-index:20}
 .panel{position:fixed;top:0;right:0;height:100vh;width:min(440px,100vw);background:#fff;z-index:21;box-shadow:-6px 0 24px rgba(0,0,0,.12);display:flex;flex-direction:column}
 .panel .ph{padding:14px 52px 10px 16px;border-bottom:1px solid var(--line)}
+.panel .back{display:inline-flex;align-items:center;gap:6px;max-width:100%;margin:0 0 8px;padding:5px 11px;border:1px solid var(--accent);border-radius:14px;background:#fff;color:var(--accent);font:inherit;font-size:12.5px;font-weight:600;line-height:1.35;text-align:left;cursor:pointer}
+.panel .back:hover{background:#eaf1f9}
 .panel .crumb{color:var(--mute);font-size:12px;margin-bottom:2px}
 .panel h2{margin:0;font-size:18px;line-height:1.35}
 .panel .full{margin:4px 0 0;font-size:12px;color:var(--mute);line-height:1.45}
@@ -242,6 +244,7 @@ b,strong,.chip .n,.tl .go{font-weight:700}
 <div id="shade" hidden></div>
 <aside id="panel" class="panel" hidden aria-label="単元の詳細">
   <div class="ph">
+    <button class="back" id="p-back" type="button" hidden></button>
     <div class="crumb" id="p-crumb"></div>
     <h2 id="p-title"></h2>
     <p class="full" id="p-full" hidden></p>
@@ -353,7 +356,20 @@ function appCard(k) {
   const art = a.app ? `<a class="art" href="${esc(a.article)}" target="_blank" rel="noopener">解説</a>` : "";
   return `<div class="app"><div class="an">${esc(a.name)}${tags}</div>${a.sub ? `<div class="as">${esc(a.sub)}</div>` : ""}<div class="ab">${open}${art}</div></div>`;
 }
-function openPanel(key) {
+// 来た道（別の単元へ飛んだあと「帰る」ためのスタック）。スマホ本体の「戻る」も同じ動きにする
+let curKey = null, trail = [], pushed = 0, unwinding = false;
+const gradeLabel = g => /^（/.test(g) ? g : "（" + g + "）";
+function renderBack() {
+  const bk = document.getElementById("p-back");
+  if (!trail.length) { bk.hidden = true; return; }
+  const p = locate(trail[trail.length - 1]);
+  // 矢印は字にしない（Zen Maru Gothic にUターン矢印が無く、1字だけ別フォントになるため）
+  bk.innerHTML = '<svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M6 3 2.5 7 6 11M2.5 7h7a3.5 3.5 0 0 1 0 7H8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span>' + esc(p.ch.c + gradeLabel(p.g) + "に帰る") + "</span>";
+  bk.hidden = false;
+}
+function openPanel(key, how) {
+  if (how === "go") { if (curKey && curKey !== key) trail.push(curKey); }
+  else if (how !== "back") trail = [];
   const { grp, row, g, ch } = locate(key);
   document.getElementById("p-crumb").textContent = `${grp.name} › ${row.name}`;
   document.getElementById("p-title").textContent = ch.c;
@@ -366,11 +382,11 @@ function openPanel(key) {
   G.forEach(gg => {
     const chips = row.cells[gg] || [];
     if (!chips.length) return;
-    c += `<li class="g"><span class="gl">${esc(gg)}</span>${gg === g ? '<span class="imanow">いま見ている学年</span>' : ""}</li>`;
+    c += `<li class="g"><span class="gl">${esc(gg)}</span>${gg === g ? '<span class="imanow">' + esc(DATA.nowLabel || "いま見ている学年") + '</span>' : ""}</li>`;
     chips.forEach((cc, i) => {
       const k2 = `${DATA.groups.indexOf(grp)}.${grp.rows.indexOf(row)}.${gg}.${i}`;
       const now = k2 === key;
-      c += `<li class="${now ? "now" : ""} ${cc.apps.length ? "" : "noapp"}"><span class="dot"></span><button type="button" data-go="${k2}"><span>${esc(cc.c)}</span><span class="cnt" title="${cc.apps.length ? "アプリ" + cc.apps.length + "本" : "アプリなし"}">${cc.apps.length || "－"}</span></button></li>`;
+      c += `<li class="${now ? "now" : ""} ${cc.apps.length ? "" : "noapp"}"><span class="dot"></span><button type="button" data-go="${k2}"><span>${esc(cc.c)}</span><span class="cnt" title="${cc.apps.length ? "アプリ" + cc.apps.length + "本" : "アプリなし"}">${cc.apps.length || "−"}</span></button></li>`;
     });
   });
   document.getElementById("p-chain-h").textContent = DATA.chainTitle || "この系統をたどる（上が下の学年）";
@@ -398,10 +414,32 @@ function openPanel(key) {
   document.querySelectorAll(`.chip[data-key="${key}"]`).forEach(el => { el.classList.add("on"); if (el.offsetParent) el.scrollIntoView({ block: "nearest", inline: "nearest" }); });
   panel.hidden = false; shade.hidden = false;
   panel.querySelector(".pb").scrollTop = 0;
+  curKey = key;
+  renderBack();
+  if (how !== "back") { try { history.pushState({ tkkPanel: 1 }, ""); pushed++; } catch (e) {} }
 }
-function closePanel() { panel.hidden = true; shade.hidden = true; document.querySelectorAll(".chip.on").forEach(e => e.classList.remove("on")); }
+function hidePanel() {
+  panel.hidden = true; shade.hidden = true; curKey = null; trail = [];
+  document.querySelectorAll(".chip.on").forEach(e => e.classList.remove("on"));
+}
+function closePanel() {                    // ×・背景・Esc：積んだ履歴もまとめて片づける
+  hidePanel();
+  if (pushed > 0) { const n = pushed; pushed = 0; unwinding = true; try { history.go(-n); } catch (e) { unwinding = false; } }
+}
+function goBack() {                        // 「帰る」ボタンと本体の「戻る」は同じ道を通す
+  if (pushed > 0) history.back();
+  else if (trail.length) openPanel(trail.pop(), "back");
+}
+window.addEventListener("popstate", () => {
+  if (unwinding) { unwinding = false; return; }
+  if (pushed > 0) pushed--;
+  if (panel.hidden) return;
+  if (trail.length) openPanel(trail.pop(), "back");
+  else hidePanel();
+});
 tbl.addEventListener("click", e => { const b = e.target.closest(".chip[data-key]"); if (b) openPanel(b.dataset.key); });
-panel.addEventListener("click", e => { const b = e.target.closest("[data-go]"); if (b) openPanel(b.dataset.go); });
+panel.addEventListener("click", e => { const b = e.target.closest("[data-go]"); if (b) openPanel(b.dataset.go, "go"); });
+document.getElementById("p-back").onclick = goBack;
 document.getElementById("p-close").onclick = closePanel;
 shade.onclick = closePanel;
 document.addEventListener("keydown", e => { if (e.key === "Escape") closePanel(); });

@@ -2,3 +2,9 @@ __pycache__/
 *.pyc
 Thumbs.db
 _history/
+
+# 手元だけで使うもの（公開しない）
+_linkcheck_state.json
+_linkcheck_report.txt
+_linkcheck_launch.vbs
+TKKへの返信文.txt
