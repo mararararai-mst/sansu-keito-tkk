@@ -33,6 +33,17 @@ class C:
         w = s.d.textlength(txt, font=fo)
         return s.t((W - w) / 2, y, txt, fo, fill)
 
+    def runc(s, ybase, segs):
+        """大きさの違う文字を1行に。ベースラインをそろえて中央に置く"""
+        ws = [s.d.textlength(t, font=fo) for t, fo, _ in segs]
+        x = (W - sum(ws)) / 2
+        for (t, fo, c), w in zip(segs, ws):
+            s.d.text((x, ybase), t, font=fo, fill=c, anchor="ls")
+            b = s.d.textbbox((x, ybase), t, font=fo, anchor="ls"); s.box.append((t, b))
+            if b[1] < 44 or b[3] > H - 44: s.bad.append(("上下にはみ出し", t[:14]))
+            x += w
+        if sum(ws) > s.lim[1] - s.lim[0]: s.bad.append(("横にはみ出し", round(sum(ws))))
+
     def stack(s, top, bottom, items):
         """items=(文字, フォント, 色, 前の行とのあき)。実寸で積んで、上下の真ん中に置く"""
         hs = [s.d.textbbox((0, 0), t, font=fo) for t, fo, _, _ in items]
@@ -89,15 +100,19 @@ def A(bg=CREAM):
     return c
 
 
-def B(bg=NAVY):
+def B(bg=NAVY, org="up", style="stack"):
+    """数字を大きく出す案。org＝アプリを作った所を見出しの上に置くか下か／style＝「系統表」の見せ方"""
     c = C(bg); c.panel(40)
-    c.stack(40, H - 40, [
-        ("小学校算数の無料アプリ", f("Black", 50), INK, 0),
-        ("115本", f("Black", 168), ACC, 26),
-        ("学年と単元から探せるように、ならべました。", f("Medium", 28), SUB, 40),
-        ("つまずいた子は、どこまで戻ればいいかまで分かります。", f("Medium", 28), SUB, 16),
-        ("特別支援教材開発研究所（TKK）", f("Medium", 20), MUTE, 34),
-    ])
+    org_row = ("特別支援教材開発研究所（TKK）の" if org == "up" else "特別支援教材開発研究所（TKK）",
+               f("Medium", 27), MUTE)
+    ttl = ("小学校算数の無料アプリ", f("Black", 50), INK)
+    rows = [org_row + (0,), ttl + (10,)] if org == "up" else [ttl + (0,), org_row + (12,)]
+    if style == "stack":
+        c.stack(40, H - 40, rows + [("115本", f("Black", 170), ACC, 22),
+                                    ("系統表", f("Black", 76), INK, 10)])
+    else:                       # 「115本の系統表」を1行で。115だけ特大
+        c.stack(40, 400, rows)
+        c.runc(505, [("115", f("Black", 170), ACC), ("本の系統表", f("Black", 72), INK)])
     return c
 
 
@@ -129,12 +144,12 @@ def D(bg=NAVY):
 
 V = {"A": A, "B": B, "C": Cc,
      "1": lambda: A(CREAM), "2": lambda: A(NAVY),
-     "3": lambda: B(CREAM), "4": lambda: B(NAVY), "5": lambda: D(NAVY)}
+     "3": lambda: B(CREAM), "4": lambda: B(NAVY), "5": lambda: D(NAVY), "6": lambda: B(NAVY, "up", "stack"), "7": lambda: B(NAVY, "up", "line")}
 if len(sys.argv) > 2 and not any(a.startswith("--round") for a in sys.argv):
     ok = V[sys.argv[1]]().save(sys.argv[2]); print(("OK " if ok else "NG ") + sys.argv[2]); sys.exit(0 if ok else 1)
 out = Path(sys.argv[1] if len(sys.argv) > 1 else ".")
 bad = 0
-keys = ["2", "4", "5"] if "--round3" in sys.argv else (["1", "2", "3", "4"] if "--round2" in sys.argv else ["A", "B", "C"])
+keys = ["6", "7"] if "--round4" in sys.argv else ["2", "4", "5"] if "--round3" in sys.argv else (["1", "2", "3", "4"] if "--round2" in sys.argv else ["A", "B", "C"])
 for k in keys:
     fn = V[k]
     q = out / f"cover_{k}.png"
