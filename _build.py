@@ -7,7 +7,7 @@ TKKアプリ系統表ビルド（算数・国語・自立活動）
   _template.html        ひな形
   → index.html / kokugo.html / jiritsu.html と、それぞれの日本語名コピー
 """
-import json, re, sys, urllib.parse
+import base64, json, re, sys, urllib.parse
 from pathlib import Path
 
 HERE = Path(__file__).parent
@@ -104,9 +104,17 @@ def build(board, tpl):
     html = html.replace("__NAPPS__", str(len(apps))).replace("__NCHIPS__", str(n_chips))
     (HERE / board["out"]).write_text(html, encoding="utf-8")
 
-    # 日本語名の配布用コピー（中身は同じ）。検索エンジンには英語名の方を正とみなしてもらう
+    # 日本語名の配布用コピー。**フォントを埋め込んだ1枚もの**にする。
+    # 学校のフィルタでURLが開けないときは、このファイルを渡せばネットを通らずに使える。
+    # 検索エンジンには英語名の方を正とみなしてもらう（noindex）。
     noindex = '<meta name="robots" content="noindex">' + chr(10) + '<link rel="canonical"'
-    (HERE / board["jp"]).write_text(html.replace('<link rel="canonical"', noindex, 1), encoding="utf-8")
+    jp = html.replace('<link rel="canonical"', noindex, 1)
+    for w in ("Medium", "Bold"):
+        f = HERE / "font" / ("ZenMaruGothic-%s.subset.woff2" % w)
+        uri = "data:font/woff2;base64," + base64.b64encode(f.read_bytes()).decode()
+        jp = jp.replace('url("font/ZenMaruGothic-%s.subset.woff2")' % w, 'url(%s)' % uri)
+    assert "font/ZenMaruGothic" not in jp, "フォントの埋め込みに失敗"
+    (HERE / board["jp"]).write_text(jp, encoding="utf-8")
     print(f"OK {board['key']:8s} apps={len(apps):3d} chips={n_chips:3d} -> {board['out']} / {board['jp']}")
 
 
