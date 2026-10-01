@@ -115,7 +115,14 @@ def build(board, tpl):
         jp = jp.replace('url("font/ZenMaruGothic-%s.subset.woff2")' % w, 'url(%s)' % uri)
     assert "font/ZenMaruGothic" not in jp, "フォントの埋め込みに失敗"
     (HERE / board["jp"]).write_text(jp, encoding="utf-8")
-    print(f"OK {board['key']:8s} apps={len(apps):3d} chips={n_chips:3d} -> {board['out']} / {board['jp']}")
+
+    # よそのサイトに置かせてもらう用の写し（_mirror/）。
+    # 中身は上の1枚ものと同じだが、ファイル名を英語名にしてある＝3枚を行き来するリンクが
+    # そのまま効く。フォルダごと置けば動く。検索は元のページに一本化したままにする
+    # （noindex＋canonicalは元のURLのまま）。
+    m = HERE / "keito"; m.mkdir(exist_ok=True)
+    (m / board["out"]).write_text(jp, encoding="utf-8")
+    print(f"OK {board['key']:8s} apps={len(apps):3d} chips={n_chips:3d} -> {board['out']} / {board['jp']} / keito/{board['out']}")
 
 
 def main():
