@@ -14,12 +14,14 @@ HERE = Path(__file__).parent
 arts = json.loads((HERE / "_src" / "tkk_articles_full.json").read_text(encoding="utf-8"))
 
 # 表を足すときはここに1行足して <key>.json を置く
+# nav だけのもの（よそのリポジトリにある表）は src を持たせず、href に絶対URLを書く
 BOARDS = [
-    {"key": "sansu",   "src": "keito.json",   "out": "index.html",   "label": "算数",     "jp": "算数アプリ系統表.html"},
-    {"key": "kokugo",  "src": "kokugo.json",  "out": "kokugo.html",  "label": "国語",     "jp": "国語アプリ系統表.html"},
-    {"key": "jiritsu", "src": "jiritsu.json", "out": "jiritsu.html", "label": "自立活動", "jp": "自立活動アプリ一覧.html"},
+    {"key": "sansu",   "src": "keito.json",   "out": "index.html",   "label": "算数アプリ", "jp": "算数アプリ系統表.html"},
+    {"key": "doga",    "label": "算数動画",   "href": "https://mararararai-mst.github.io/sansu-doga-eboard/"},
+    {"key": "kokugo",  "src": "kokugo.json",  "out": "kokugo.html",  "label": "国語",       "jp": "国語アプリ系統表.html"},
+    {"key": "jiritsu", "src": "jiritsu.json", "out": "jiritsu.html", "label": "自立活動",   "jp": "自立活動アプリ一覧.html"},
 ]
-NAV = [{"label": b["label"], "href": b["out"]} for b in BOARDS]
+NAV = [{"label": b["label"], "href": b.get("href") or b["out"]} for b in BOARDS]
 
 # 同梱フォント(Zen Maru Gothic)に無い字は、形の近い字へ置き換える（1字だけ別フォントになるのを防ぐ）
 FONT_SUB = {"―": "—"}  # ― → —
@@ -130,6 +132,8 @@ def main():
     only = sys.argv[1] if len(sys.argv) > 1 else None
     for b in BOARDS:
         if only and b["key"] != only:
+            continue
+        if "src" not in b:          # nav だけの行（よそのリポジトリの表）
             continue
         if not (HERE / b["src"]).exists():
             print(f"-- {b['key']}: {b['src']} が無いので飛ばす")
