@@ -21,10 +21,14 @@ BOARDS = [
     {"key": "kokugo",  "src": "kokugo.json",  "out": "kokugo.html",  "label": "国語",       "jp": "国語アプリ系統表.html"},
     {"key": "jiritsu", "src": "jiritsu.json", "out": "jiritsu.html", "label": "自立活動",   "jp": "自立活動アプリ一覧.html"},
 ]
-NAV = [{"label": b["label"], "href": b.get("href") or b["out"]} for b in BOARDS]
-# TKKさんのサイトに置かせてもらう写し（keito/）のnav。よそのリポジトリの表は入れない。
-# 押すとそのホストから出てしまい、学校のフィルタで止まるため。写しの中だけで完結させる。
-NAV_KEITO = [{"label": b["label"], "href": b["out"]} for b in BOARDS if "src" in b]
+# 既定のnav＝この3枚だけ。公開ページにも、TKKさんに置いてもらう写しにも、これを使う。
+# eboardの動画系統表を並べないのは、先方から「案内は学校内と家庭での学習の範囲に
+# とどめてほしい」という条件をいただいているため（2026-10-06）。公開ページやよその
+# サイトにボタンを置くと、不特定多数への案内になってしまう。
+NAV = [{"label": b["label"], "href": b["out"]} for b in BOARDS if "src" in b]
+# 校内配布用の日本語名コピーだけ、よそのリポジトリの表（eboard）も並べる。
+# ファイルで校内の先生に渡すものなので、上の許可の範囲に収まる。
+NAV_KONAI = [{"label": b["label"], "href": b.get("href") or b["out"]} for b in BOARDS]
 
 # 同梱フォント(Zen Maru Gothic)に無い字は、形の近い字へ置き換える（1字だけ別フォントになるのを防ぐ）
 FONT_SUB = {"―": "—"}  # ― → —
@@ -107,30 +111,33 @@ def build(board, tpl):
     for k, v in cfg.get("text", {}).items():          # 先に表ごとの文言を入れる
         html = html.replace("__%s__" % k, v)
     html = html.replace("__NAPPS__", str(len(apps))).replace("__NCHIPS__", str(n_chips))
+    assert "sansu-doga-eboard" not in html, "公開ページにeboardへのリンクが残っている"
     (HERE / board["out"]).write_text(html, encoding="utf-8")
 
-    # 日本語名の配布用コピー。**フォントを埋め込んだ1枚もの**にする。
+    # ここから先は**フォントを埋め込んだ1枚もの**。
     # 学校のフィルタでURLが開けないときは、このファイルを渡せばネットを通らずに使える。
     # 検索エンジンには英語名の方を正とみなしてもらう（noindex）。
     noindex = '<meta name="robots" content="noindex">' + chr(10) + '<link rel="canonical"'
-    jp = html.replace('<link rel="canonical"', noindex, 1)
+    emb = html.replace('<link rel="canonical"', noindex, 1)
     for w in ("Medium", "Bold"):
         f = HERE / "font" / ("ZenMaruGothic-%s.subset.woff2" % w)
         uri = "data:font/woff2;base64," + base64.b64encode(f.read_bytes()).decode()
-        jp = jp.replace('url("font/ZenMaruGothic-%s.subset.woff2")' % w, 'url(%s)' % uri)
-    assert "font/ZenMaruGothic" not in jp, "フォントの埋め込みに失敗"
+        emb = emb.replace('url("font/ZenMaruGothic-%s.subset.woff2")' % w, 'url(%s)' % uri)
+    assert "font/ZenMaruGothic" not in emb, "フォントの埋め込みに失敗"
+
+    # 日本語名の配布用コピー＝校内の先生に渡すファイル。ここだけ nav に「算数動画」を足す。
+    jp = emb.replace(json.dumps(NAV, ensure_ascii=False),
+                     json.dumps(NAV_KONAI, ensure_ascii=False), 1)
+    assert "sansu-doga-eboard" in jp, "校内配布版に算数動画のnavが入っていない"
     (HERE / board["jp"]).write_text(jp, encoding="utf-8")
 
-    # よそのサイトに置かせてもらう用の写し（_mirror/）。
+    # TKKさんのサイトに置かせてもらう写し（keito/）。
     # 中身は上の1枚ものと同じだが、ファイル名を英語名にしてある＝3枚を行き来するリンクが
     # そのまま効く。フォルダごと置けば動く。検索は元のページに一本化したままにする
-    # （noindex＋canonicalは元のURLのまま）。
+    # （noindex＋canonicalは元のURLのまま）。nav は3枚ぶんのまま＝写しの中で完結する。
     m = HERE / "keito"; m.mkdir(exist_ok=True)
-    mir = jp.replace(json.dumps(NAV, ensure_ascii=False),
-                     json.dumps(NAV_KEITO, ensure_ascii=False), 1)
-    assert json.dumps(NAV, ensure_ascii=False) not in mir, "写しのnavの差し替えに失敗"
-    assert "sansu-doga-eboard" not in mir, "写しにeboardへのリンクが残っている"
-    (m / board["out"]).write_text(mir, encoding="utf-8")
+    assert "sansu-doga-eboard" not in emb, "写しにeboardへのリンクが残っている"
+    (m / board["out"]).write_text(emb, encoding="utf-8")
     print(f"OK {board['key']:8s} apps={len(apps):3d} chips={n_chips:3d} -> {board['out']} / {board['jp']} / keito/{board['out']}")
 
 
