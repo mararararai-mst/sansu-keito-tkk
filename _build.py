@@ -22,6 +22,9 @@ BOARDS = [
     {"key": "jiritsu", "src": "jiritsu.json", "out": "jiritsu.html", "label": "自立活動",   "jp": "自立活動アプリ一覧.html"},
 ]
 NAV = [{"label": b["label"], "href": b.get("href") or b["out"]} for b in BOARDS]
+# TKKさんのサイトに置かせてもらう写し（keito/）のnav。よそのリポジトリの表は入れない。
+# 押すとそのホストから出てしまい、学校のフィルタで止まるため。写しの中だけで完結させる。
+NAV_KEITO = [{"label": b["label"], "href": b["out"]} for b in BOARDS if "src" in b]
 
 # 同梱フォント(Zen Maru Gothic)に無い字は、形の近い字へ置き換える（1字だけ別フォントになるのを防ぐ）
 FONT_SUB = {"―": "—"}  # ― → —
@@ -123,7 +126,11 @@ def build(board, tpl):
     # そのまま効く。フォルダごと置けば動く。検索は元のページに一本化したままにする
     # （noindex＋canonicalは元のURLのまま）。
     m = HERE / "keito"; m.mkdir(exist_ok=True)
-    (m / board["out"]).write_text(jp, encoding="utf-8")
+    mir = jp.replace(json.dumps(NAV, ensure_ascii=False),
+                     json.dumps(NAV_KEITO, ensure_ascii=False), 1)
+    assert json.dumps(NAV, ensure_ascii=False) not in mir, "写しのnavの差し替えに失敗"
+    assert "sansu-doga-eboard" not in mir, "写しにeboardへのリンクが残っている"
+    (m / board["out"]).write_text(mir, encoding="utf-8")
     print(f"OK {board['key']:8s} apps={len(apps):3d} chips={n_chips:3d} -> {board['out']} / {board['jp']} / keito/{board['out']}")
 
 
